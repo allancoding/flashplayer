@@ -4,7 +4,7 @@
   Flashplayer
 </h2>
 
-This is a flashplayer that works with a bowser useing flash version 32 the last update before it was discontinued.
+This is a flashplayer that works with a bowser using flash version 32 the last update before it was discontinued.
 
 ## Run dev
 
