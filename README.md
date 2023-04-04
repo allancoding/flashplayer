@@ -12,4 +12,4 @@ npm i
 npm start
 ```
 
-<sup>This is preinstalled in to PrismOS</sub>
+<sup>This is preinstalled in [PrismOS](https://github.com/PrismNet)</sub>
