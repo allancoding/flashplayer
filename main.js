@@ -1,6 +1,6 @@
 const electron = require('electron');
 const path = require('path');
-const { app, BrowserWindow, Menu } = electron; 
+const { app, BrowserWindow, Menu } = electron;
 const prompt = require('electron-prompt');
 const Store = require('./settings.js');
 
@@ -13,7 +13,6 @@ const settings = new Store({
 
 let pluginName = null;
 let IsDevOpen = false;
-let iconPath = path.join(__dirname, "./icon.png");
 
 switch (process.platform) {
 	case 'win32':
@@ -38,12 +37,21 @@ switch (process.platform) {
 if (process.platform !== "darwin") {
 	app.commandLine.appendSwitch('high-dpi-support', "1");
 }
-app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
+
+if(process.mainModule.filename.indexOf('app.asar') === -1) {
+	pluginName = path.join(__dirname, pluginName);
+}else{
+	pluginName = path.join(app.getAppPath(), pluginName).replace('app.asar', 'app.asar.unpacked');
+}
+app.commandLine.appendSwitch('ppapi-flash-path', pluginName);
 app.commandLine.appendSwitch('disable-site-isolation-trials');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
+//app.commandLine.appendSwitch("--enable-npapi");
+//app.commandLine.appendSwitch("--enable-logging");
+//app.commandLine.appendSwitch("--log-level", 4);
 app.allowRendererProcessReuse = true;
 
 let mainWindow;
@@ -56,12 +64,12 @@ function promptIt(isSplash, win) {
 		type: 'input'
 	})
 	.then((result) => {
-		if (result == null) { console.log("The user canceled!") 
-            if (!isSplash){app.quit()}} 
-            else { 
-                console.log('Result: ', result) 
+		if (result == null) { console.log("The user canceled!")
+            if (!isSplash){app.quit()}}
+            else {
+                console.log('Result: ', result)
                 if (isSplash) { win.loadURL(result) }
-				else { 
+				else {
                     win.loadURL(result);
 					setTimeout(() => { win.show() }, 1000);
                 }
@@ -133,13 +141,13 @@ app.on('ready', function () {
 
 	let { width, height } = settings.get('windowBounds');
 	let win = new BrowserWindow({
+		title: "Flash Player",
 		width: width,
 		height: height,
 		minWidth: 200, minHeight: 200,
 		show: false,
 		transparent: false,
 		center: true,
-		icon: iconPath,
 		webPreferences: {
 			devTools: true,
 			contextIsolation: true,
