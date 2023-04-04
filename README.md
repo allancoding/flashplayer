@@ -13,4 +13,6 @@ npm i
 npm start
 ```
 
+to run the included file of btd5, enter the url as `file:///home/<USERNAME>/Downloads/flashplayer-main/btd5test.html`
+
 <sup>This is preinstalled in [PrismOS](https://github.com/PrismNet)</sub>
