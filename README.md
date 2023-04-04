@@ -1,4 +1,7 @@
-# Flashplayer
+<h2 align="center">
+  <img src="./icon.png">
+  Flashplayer
+</h2>
 
 This is a flashplayer that works with a bowser useing flash version 32 the last update before it was discontinued.
 

@@ -6,16 +6,52 @@
   "directories": {
     "flash": "flash"
   },
+  "build": {
+    "files": [
+      "./icon.ico"
+    ]
+  },
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . 'Flash Player' --platform=all",
+    "buildpack": "electron-packager . 'Flash Player' --platform=all --arch=ia32 --overwrite --icon=icon.ico --out=builds",
     "pack": "build --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "publish": "electron-builder --platform=all -p always",
+    "buildWin32": "electron-packager . 'Flash Player' --platform=win32 --arch=ia32 --overwrite --icon=icon.ico --production --prune -p always",
+    "buildWin64": "electron-packager . 'Flash Player' --platform=win --overwrite --icon=icon.ico -p always --prune-license nm-prune --force",
+    "macos": "electron-packager . 'Flash Player' --platform=darwin --arch=x64 --overwrite --icon=icon.ico --production --prune -p always --out=builds"
   },
   "devDependencies": {
     "electron": "^11.5.0",
-    "electron-builder": "^22.11.7",
-    "electron-packager": "^15.2.0",
-    "electron-prompt": "^1.6.2"
+    "electron-builder": "^23.6.0",
+    "electron-packager": "^17.1.1",
+    "electron-prompt": "^1.7.0"
+  },
+  "dependencies": {
+    "electron-prompt": "^1.7.0",
+    "electron-storage": "^1.0.7"
+  },
+   "build": {
+    "appId": "pm.flashplayer",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "uninstallDisplayName": "Flash Player",
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "FlashPlayer.${ext}"
+    }
   }
 }
