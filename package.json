@@ -1,0 +1,21 @@
+{
+  "name": "Flash Player",
+  "version": "1.3.0",
+  "description": "A flash player!",
+  "main": "main.js",
+  "directories": {
+    "flash": "flash"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . 'Flash Player' --platform=all",
+    "pack": "build --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron": "^11.5.0",
+    "electron-builder": "^22.11.7",
+    "electron-packager": "^15.2.0",
+    "electron-prompt": "^1.6.2"
+  }
+}
