@@ -1,0 +1,30 @@
+<title>Flash Player</title>
+<style>
+.start{
+    display: block;
+}
+.flash{
+    display: none;
+}
+</style>
+<div id="start">
+    <center>
+        <img src="./icon.png">
+        <h1>Flash Player</h1>
+        <hr>
+        <h3>Pick a swf file!</h3>
+        <p>
+        <label for="flashfile">Pick file: </label>
+        <input type="file" id="flashfile" accept=".swf"></p>
+        <p id="flashpath"></p>
+        <button type="button" onclick="flashrun()">Run</button>
+    </center>
+</div>
+<div id="flash">
+    <embed src="" style="width:100%; height:50vw" title="BTD5">
+</div>
+<script>
+function flashrun() {
+  document.getElementById("flashpath").innerHTML = document.getElementById("flashfile").value;
+}
+</script>
