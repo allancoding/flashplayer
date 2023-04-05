@@ -1,6 +1,6 @@
 const electron = require('electron');
 const path = require('path');
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 const prompt = require('electron-prompt');
 const Store = require('./settings.js');
 
@@ -55,29 +55,6 @@ app.commandLine.appendSwitch('disable-renderer-backgrounding');
 app.allowRendererProcessReuse = true;
 
 let mainWindow;
-
-function promptIt(isSplash, win) {
-	prompt({
-        title: "Flash Player",
-		label: "URL/File Path: ",
-		inputAttrs: { type: 'text' },
-		type: 'input'
-	})
-	.then((result) => {
-		if (result == null) { console.log("The user canceled!")
-            if (!isSplash){app.quit()}}
-            else {
-                console.log('Result: ', result)
-                if (isSplash) { win.loadURL(result) }
-				else {
-                    win.loadURL(result);
-					setTimeout(() => { win.show() }, 1000);
-                }
-
-            }
-	}).catch((error) => {console.log('LOOKS LIKE WE RAN INTO AN ERROR: ' + error)})
-}
-
 function promptClearCache(win){
 	let choice = electron.dialog.showMessageBoxSync({
 		type: 'question',
@@ -110,9 +87,9 @@ app.on('ready', function () {
 	var menu = Menu.buildFromTemplate([{
 		label: 'Menu',
 		submenu: [{
-			label: 'Change URL',
+			label: 'Change Swf File',
 			click() {
-				promptIt(true, win)
+				win.loadFile('index.html');
 			}
 		},{
 			label: 'Reload Page',
@@ -152,10 +129,24 @@ app.on('ready', function () {
 			devTools: true,
 			contextIsolation: true,
 			plugins: true,
+			preload: path.join(__dirname, 'preload.js'),
+			nodeIntegration: true,
 			nativeWindowOpen: true
 		}
 	});
-	promptIt(false, win);
+	win.loadFile('index.html');
+	setTimeout(() => { win.show() }, 1000);
+	ipcMain.on('setUrl', (event, url, type) => {
+		const webContents = event.sender
+		const win = BrowserWindow.fromWebContents(webContents)
+		if(type == "url"){
+			win.loadURL(url);
+		}else if(type == "file"){
+			win.loadFile(url);
+		}else{
+			console.log('LOOKS LIKE WE RAN INTO AN ERROR: ');
+		}
+	  })
 	win.on('resize', () => {
 		// The event doesn't pass us the window size, so we call the `getBounds` method which returns an object with
 		// the height, width, and x and y coordinates.
@@ -163,7 +154,14 @@ app.on('ready', function () {
 		// Now that we have them, save them using the `set` method.
 		settings.set('windowBounds', { width, height });
 	});
+	app.on('activate', function () {
+		if (BrowserWindow.getAllWindows().length === 0) createWindow()
+	})
 })
+ipcMain.on('synchronous-message', (event, arg) => {
+	console.log(arg);
+	console.log(event.returnValue);
+  })
 app.on('window-all-closed', () => {
 	if( process.platform !== 'darwin' ) {
         app.quit();

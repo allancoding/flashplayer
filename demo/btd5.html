@@ -1,0 +1,50 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script type="text/javascript">
+    swfobject.embedSWF("bloons-tower-defense-5.swf", "flash-content", "100%", "100%", "9.0.0", '', null, {wmode: 'transparent'});
+</script>
+<style>
+body {
+    background-color: #000;
+    margin: 0;
+}
+#container {
+  
+  /* Necessary so we can position the contained IFrame absolutely */
+  position: relative;
+  
+  /* We set height to 0 because we control it indirectly through padding-bottom,
+   * as the height attribute can't be set with a percentage */
+  height: 0;
+  
+  /* Prevent scrollbars */
+  overflow: hidden;
+
+  /* Now comes the important part. The padding-bottom resizes based on the width
+   * and decides what aspect ratio the container should have.
+   * 56,25% means we have an aspect ratio of 16:9
+   * 75% would be an aspect ratio of 4:3
+   * To get any aspect ratio as a percentage: [height] / [width] * 100 */
+  padding-bottom: 75%;
+
+}
+
+/* The IFrame inside the wrapper will always be sized to 100% width & height of
+ * the wrapper */
+#container #flash-content {
+
+  /* ...so we can position it in the top-left corner, overriding the wrapper's
+   * padding-bottom */
+  position: absolute;
+  
+  /*  Top-left corner */
+  top: 0;
+  left: 0;
+  
+  /*  Completely fill the containing wrapper */
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
+<div id="container">
+    <div id="flash-content"></div>
+</div>
