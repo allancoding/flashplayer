@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 	<head>
-		<title>Demo - Bloons Tower Defense 5</title>
+		<title>Swf</title>
 		<script type="text/javascript" src="../swfobject.js"></script>
 		<style>
 		body, html {
@@ -10,7 +10,10 @@
 		}
 		</style>
 		<script type="text/javascript">
-			swfobject.embedSWF("./bloons-tower-defense-5.swf", "flashContent", "100%", "100%", "9.0.0", '', null, {wmode: 'transparent', quality: 'high', allowScriptAccess: 'always', align: 'middle', scale: 'exactfit' });
+		var url = new URLSearchParams(window.location.href);
+		alert(url.get('url'));
+        swfobject.embedSWF(url.get('url'), "flashContent", "100%", "100%", "9.0.0", '', null, {wmode: 'transparent', quality: 'high', allowScriptAccess: 'always', align: 'middle', scale: 'exactfit' });
+        document.title = url.get('title');
 		</script>
 	</head>
 	<body>

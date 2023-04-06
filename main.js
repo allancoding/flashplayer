@@ -7,12 +7,14 @@ const Store = require('./settings.js');
 const settings = new Store({
 	configName: 'user-preferences',
 	defaults: {
-	  windowBounds: { width: 800, height: 600 }
+	  windowBounds: { width: 800, height: 600 },
+	  windowRatio: 4/3
 	}
   });
 
 let pluginName = null;
 let IsDevOpen = false;
+let winratio = settings.get('windowRatio');
 
 switch (process.platform) {
 	case 'win32':
@@ -85,7 +87,7 @@ function showHideDev(win){
 
 app.on('ready', function () {
 	var menu = Menu.buildFromTemplate([{
-		label: 'Menu',
+		label: 'Flash Player Menu',
 		submenu: [{
 			label: 'Change Swf File',
 			click() {
@@ -96,6 +98,23 @@ app.on('ready', function () {
 			click() {
 				win.reload();
 			}
+		},{
+			label: 'View',
+			submenu: [{
+				label: '4:3',
+				click() {
+					winratio = 4/3;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			},{
+				label: '16:9',
+				click() {
+					winratio = 16/9;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			}]
 		},{
 			label: 'Clear Cache',
 			click() {
@@ -153,6 +172,7 @@ app.on('ready', function () {
 		let { width, height } = win.getBounds();
 		// Now that we have them, save them using the `set` method.
 		settings.set('windowBounds', { width, height });
+		win.setAspectRatio(winratio);
 	});
 	app.on('activate', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
