@@ -1,5 +1,5 @@
 {
-  "name": "Flash-Player",
+  "name": "Flash Player",
   "version": "1.5.2",
   "description": "A flash player!",
   "main": "main.js",
@@ -40,7 +40,7 @@
       "uninstallDisplayName": "Flash Player",
       "oneClick": true,
       "perMachine": false,
-      "artifactName": "FlashPlayer.${ext}"
+      "artifactName": "Flash Player.${ext}"
     }
   },
   "scripts": {
@@ -59,11 +59,9 @@
   "devDependencies": {
     "electron": "^11.5.0",
     "electron-builder": "^23.6.0",
-    "electron-packager": "^17.1.1",
-    "electron-prompt": "^1.7.0"
+    "electron-packager": "^17.1.1"
   },
   "dependencies": {
-    "electron-prompt": "^1.7.0",
     "electron-storage": "^1.0.7"
   }
 }

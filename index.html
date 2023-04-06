@@ -83,6 +83,7 @@
         <img src="./icon.png">
         <h1>Flash Player</h1>
         <div class="opacity">
+        <div id="flashinput">
         <label for="flashfile">Pick file: </label>
         <button type="button" id="flashfile">Choose File</button><br>
         <label for="flashurl">Pick url: </label>
@@ -90,7 +91,12 @@
         <button type="button" id="flashopen">Open</button><br>
         <p id="flasherror"></p>
         <button type="button" id="flashdemo">Open Demo</button>
-        <button type="button" onclick="window.electronAPI.setUrl('./page.html?title=game&url=https://www.coolmath-games.com/gameFrame?u=sites/cmatgame/files/games/jacksmith.swf&f=jacksmith.swf', 'file')">Test</button>
+        <button type="button" id="flashgames">Open Games</button>
+        </div>
+        <div id="flashlist" style="display: none;">
+        <p id="flashlinks">Loading...</p>
+        <button type="button" id="flashback"><- Back</button>
+        </div>
         </div>
 </div>
 <script>
@@ -107,6 +113,26 @@ flashdemo.addEventListener('click', () => {
     document.getElementById("main").classList.remove("gradient-background");
     document.getElementById('start').style.display = "none"
 });
+const flashback = document.getElementById('flashback');
+flashback.addEventListener('click', () => {
+    document.getElementById('flashinput').style.display = "block"
+    document.getElementById('flashlist').style.display = "none"
+});
+const flashgames = document.getElementById('flashgames');
+flashgames.addEventListener('click', () => {
+    document.getElementById('flashinput').style.display = "none"
+    document.getElementById('flashlist').style.display = "block"
+});
+async function getData(document){
+  const api_url = "https://api.github.com/repos/Miststorm/swfFiles/contents/games";
+  const response = await fetch(api_url);
+  const obj = (await response.json());
+  document.getElementById("flashlinks").innerHTML = "";
+  for (let i = 0 ; i < obj.length ; i++) {
+	document.getElementById("flashlinks").innerHTML += "<a href='./page.html?name="+obj[i].name.replace('.swf', '')+"&url=https://cdn.jsdelivr.net/gh/Miststorm/swfFiles/" + obj[i].path + "'>"+ obj[i].name.replace('.swf', '') + "</a>" + "<br>";
+  }
+}
+getData(document);
 </script>
 </body>
 </html>
