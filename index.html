@@ -35,6 +35,46 @@
             border-radius: 25px;
             margin: 20px;
         }
+        button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #550000;
+            border-radius: 25px;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            font-family: inherit;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        input[type=text], input[type=url] {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #550000;
+            border-radius: 25px;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            font-family: inherit;
+            transition-duration: 0.4s;
+        }
+        button:hover {
+            background-color: #550000;
+            color: white;
+        }
+        input[type=text]:focus, input[type=url]:focus {
+            background-color: #550000;
+            color: white;
+        }
+        *:focus {
+            outline: none;
+        }
+        h1 {
+            margin-block-start: 0.4em;
+            margin-block-end: 0.4em;
+        }
 		</style>
     </head>
 <body id="main" class="gradient-background">
@@ -44,12 +84,11 @@
         <h1>Flash Player</h1>
         <div class="opacity">
         <label for="flashfile">Pick file: </label>
-        <button type="button" id="flashfile">Choose File</button>
-        <p></p>
+        <button type="button" id="flashfile">Choose File</button><br>
         <label for="flashurl">Pick url: </label>
         <input type="url" id="flashurl">
-        <button type="button" id="flashopen">Open</button>
-        <p></p>
+        <button type="button" id="flashopen">Open</button><br>
+        <p id="flasherror"></p>
         <button type="button" id="flashdemo">Open Demo</button>
         <button type="button" onclick="window.electronAPI.setUrl('./page.html?title=game&url=https://www.coolmath-games.com/gameFrame?u=sites/cmatgame/files/games/jacksmith.swf&f=jacksmith.swf', 'file')">Test</button>
         </div>
