@@ -19,10 +19,11 @@ jobs:
       - name: Build appimage
         run: |
           npm run appimage
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
-          files: dist/Flash-Player-1.5.2.AppImage
+          name: appimage
+          path: dist/
 
   # Run-PSScriptAnalyzer-on-Windows:
   #   name: Run PSScriptAnalyzer on Windows
