@@ -51,14 +51,16 @@
     "dist": "electron-builder",
     "appimage": "electron-builder build --linux AppImage --publish=never",
     "publish": "electron-builder --platform=all -p always",
-    "linux": "electron-packager . Flash-Player --overwrite --asar=true --platform=linux --arch=x64 --icon.png --prune=true --out=release-builds",
-    "windows": "electron-packager . Flash-Player --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName='PrismNet' --version-string.FileDescription='A flash player!' --version-string.ProductName='Flash PLayer'",
-    "macos": "electron-packager .  Flash-Player --overwrite --platform=darwin --arch=x64 --icon=icon.ico --prune=true --out=release-build"
+    "linux": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=linux --arch=x64 --icon.png --prune=true --out=release-builds",
+    "windows": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName=\"PrismNet\" --version-string.FileDescription=\"A flash player!\" --version-string.ProductName=\"Flash PLayer\"",
+    "macos": "electron-packager .  \"Flash Player\" --overwrite --platform=darwin --arch=x64 --icon=icon.ico --prune=true --out=release-build"
   },
   "devDependencies": {
     "electron": "^11.5.0",
     "electron-builder": "^23.6.0",
-    "electron-packager": "^17.1.1"
+    "electron-packager": "^17.1.1",
+    "electron-winstaller": "^5.1.0",
+    "electron-installer-dmg": "^4.0.0"
   },
   "dependencies": {
     "electron-storage": "^1.0.7"
