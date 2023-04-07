@@ -20,8 +20,7 @@ jobs:
         run: |
           npm run appimage
       - name: Make AppImage dir 
-        run: mkdir -p finalAppImage/
-        run: mv ./dist/Flash-Player.*.*.*.AppImage ./finalAppImage/
+        run: mkdir -p finalAppImage/ && mv ./dist/Flash-Player.*.*.*.AppImage ./finalAppImage/
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
