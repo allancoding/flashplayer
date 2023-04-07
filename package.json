@@ -12,7 +12,11 @@
     "appId": "net.prismos.flashplayer",
     "files": [
       "./flash/**/*",
-      "./*.js"
+      "./*.js",
+      "./installers/**/*",
+      "./*.html",
+      "./demo/**/*",
+      "./icon.*"
     ],
      "asarUnpack": [
       "./flash/**/*"
@@ -78,7 +82,7 @@
     "installer-win": "node installers/windows/createinstaller.js",
     "installer-mac": "electron-installer-dmg ./release-builds/Flash\\ Player\\ darwin-x64/Flash\\ Player\\.app Flash-Player --out=release-builds --overwrite --icon=icon.icns",
     "installer-linux-deb": "electron-installer-debian --src release-builds/Flash\\ Player\\ linux-deb-x64/ --arch amd64 --config debian.json    ",
-    "appimage": "electron-packager . \"Flash Player\" --overwrite --linux AppImage --icon.png --prune=true --out=release-builds",
+    "appimage": "electron-builder build --linux AppImage --publish=never",
     "linux": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=linux --arch=x64 --icon.png --prune=true --out=release-builds",
     "windows": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName=\"PrismNet\" --version-string.FileDescription=\"A flash player!\" --version-string.ProductName=\"Flash PLayer\"",
     "macos": "electron-packager .  \"Flash Player\" --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=release-build"
