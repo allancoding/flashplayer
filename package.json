@@ -1,6 +1,7 @@
 {
   "name": "Flash-Player",
   "version": "1.6.3",
+  "productName": "Flash Player",
   "description": "A flash player!",
   "main": "main.js",
   "author": {
@@ -45,22 +46,21 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . 'Flash Player' --platform=all --publish=never",
-    "buildpack": "electron-packager . 'Flash Player' --platform=all --arch=ia32 --overwrite --icon=icon.ico --out=builds --publish=never",
-    "pack": "build --dir",
-    "dist": "electron-builder",
+    "installer-win": "node installers/windows/createinstaller.js",
+    "installer-mac": "electron-installer-dmg ./release-builds/Flash\\ Player\\ darwin-x64/Flash\\ Player\\.app Flash-Player --out=release-builds --overwrite --icon=icon.icns",
+    "installer-linux-deb": "electron-installer-debian --src release-builds/Flash\\ Player\\ linux-deb-x64/ --arch amd64 --config debian.json    ",
     "appimage": "electron-builder build --linux AppImage --publish=never",
-    "publish": "electron-builder --platform=all -p always",
     "linux": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=linux --arch=x64 --icon.png --prune=true --out=release-builds",
     "windows": "electron-packager . \"Flash Player\" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName=\"PrismNet\" --version-string.FileDescription=\"A flash player!\" --version-string.ProductName=\"Flash PLayer\"",
-    "macos": "electron-packager .  \"Flash Player\" --overwrite --platform=darwin --arch=x64 --icon=icon.ico --prune=true --out=release-build"
+    "macos": "electron-packager .  \"Flash Player\" --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=release-build"
   },
   "devDependencies": {
     "electron": "^11.5.0",
     "electron-builder": "^23.6.0",
     "electron-packager": "^17.1.1",
     "electron-winstaller": "^5.1.0",
-    "electron-installer-dmg": "^4.0.0"
+    "electron-installer-dmg": "^4.0.0",
+    "electron-installer-debian": "3.1.0"
   },
   "dependencies": {
     "electron-storage": "^1.0.7"
