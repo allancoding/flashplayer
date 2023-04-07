@@ -27,17 +27,17 @@ jobs:
           name: appimage
           path: finalAppImage/
 
-  # Run-PSScriptAnalyzer-on-Windows:
-  #   name: Run PSScriptAnalyzer on Windows
-  #   runs-on: windows-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Install PSScriptAnalyzer module
-  #       shell: pwsh
-  #       run: |
-  #         Set-PSRepository PSGallery -InstallationPolicy Trusted
-  #         Install-Module PSScriptAnalyzer -ErrorAction Stop
-  #     - name: Get list of rules
-  #       shell: pwsh
-  #       run: |
-  #         Get-ScriptAnalyzerRule
+  build-windows:
+     name: Run PSScriptAnalyzer on Windows
+     runs-on: windows-latest
+     steps:
+       - uses: actions/checkout@v3
+       - name: Setup Node
+         shell: bash
+         run: nvm install 19 && nvm use 19
+       - name: Install dependencies
+         shell: bash
+         run: npm i
+       - name: Build for Window
+         shell: bash
+         run: npm run windows
