@@ -28,13 +28,13 @@ jobs:
           path: finalAppImage/
 
   build-windows:
-     name: Run PSScriptAnalyzer on Windows
+     name: Build latest push on Windows
      runs-on: windows-latest
      steps:
        - uses: actions/checkout@v3
        - name: Setup Node
          shell: bash
-         run: nvm install 19 && nvm use 19
+         run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && nvm install 19 && nvm use 19
        - name: Install dependencies
          shell: bash
          run: npm i
