@@ -129,7 +129,7 @@ async function getData(document){
   const obj = (await response.json());
   document.getElementById("flashlinks").innerHTML = "";
   for (let i = 0 ; i < obj.length ; i++) {
-	document.getElementById("flashlinks").innerHTML += "<a href='./page.html?name="+obj[i].name.replace('.swf', '')+"&url=https://cdn.jsdelivr.net/gh/Miststorm/swfFiles/" + obj[i].path + "'>"+ obj[i].name.replace('.swf', '') + "</a>" + "<br>";
+	document.getElementById("flashlinks").innerHTML += "<a style='color: #fff;' href='./page.html?name="+obj[i].name.replace('.swf', '')+"&url=https://cdn.jsdelivr.net/gh/Miststorm/swfFiles/" + obj[i].path + "'>"+ obj[i].name.replace('.swf', '') + "</a>" + "<br>";
   }
 }
 getData(document);

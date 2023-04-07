@@ -101,6 +101,33 @@ app.on('ready', function () {
 		},{
 			label: 'View',
 			submenu: [{
+				label: 'Full Screen',
+				click() {
+					win.setFullScreen(true);
+					win.webContents.send('fullscreen', true);
+				}
+			},{
+				label: '1:1',
+				click() {
+					winratio = 1/1;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			},{
+				label: '2:3',
+				click() {
+					winratio = 2/3;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			},{
+				label: '3:2',
+				click() {
+					winratio = 3/2;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			},{
 				label: '4:3',
 				click() {
 					winratio = 4/3;
@@ -111,6 +138,13 @@ app.on('ready', function () {
 				label: '16:9',
 				click() {
 					winratio = 16/9;
+					win.setAspectRatio(winratio);
+					settings.set('windowRatio', winratio);
+				}
+			},{
+				label: '9:16',
+				click() {
+					winratio = 9/16;
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
 				}
@@ -167,23 +201,39 @@ app.on('ready', function () {
 		}
 	  })
 	win.on('resize', () => {
-		// The event doesn't pass us the window size, so we call the `getBounds` method which returns an object with
-		// the height, width, and x and y coordinates.
+		if(win.isFullScreen() == false){
 		let { width, height } = win.getBounds();
-		// Now that we have them, save them using the `set` method.
 		settings.set('windowBounds', { width, height });
 		win.setAspectRatio(winratio);
+		}
+	});
+	app.on('browser-window-focus', () => {
+	electron.globalShortcut.register('Escape', function(){
+		win.setFullScreen(false);
+		win.webContents.send('fullscreen', false);
+	});
+	electron.globalShortcut.register('CommandOrControl+F', function(){
+		if(win.isFullScreen()){
+			win.setFullScreen(false);
+			win.webContents.send('fullscreen', false);
+		}else{
+			win.setFullScreen(true);
+			win.webContents.send('fullscreen', true);
+		}
+	});
 	});
 	app.on('activate', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	})
 })
-ipcMain.on('synchronous-message', (event, arg) => {
-	console.log(arg);
-	console.log(event.returnValue);
-  })
 app.on('window-all-closed', () => {
 	if( process.platform !== 'darwin' ) {
         app.quit();
     }
 });
+app.on('will-quit', function(){
+  electron.globalShortcut.unregisterAll();
+});
+app.on('browser-window-blur', () => {
+  electron.globalShortcut.unregisterAll()
+})
