@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: appimage
-          path: dist/
+          path: dist/Flash-Player.*.*.*.AppImage
 
   # Run-PSScriptAnalyzer-on-Windows:
   #   name: Run PSScriptAnalyzer on Windows
