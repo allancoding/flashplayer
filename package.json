@@ -45,16 +45,16 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . 'Flash Player' --platform=all",
-    "buildpack": "electron-packager . 'Flash Player' --platform=all --arch=ia32 --overwrite --icon=icon.ico --out=builds",
+    "build": "electron-packager . 'Flash Player' --platform=all --publish=never",
+    "buildpack": "electron-packager . 'Flash Player' --platform=all --arch=ia32 --overwrite --icon=icon.ico --out=builds --publish=never",
     "pack": "build --dir",
     "test": "electron ./dist/linux-unpacked/resources/unpackedcopy",
     "dist": "electron-builder",
-    "appimage": "electron-builder build --linux AppImage",
+    "appimage": "electron-builder build --linux AppImage --publish=never",
     "publish": "electron-builder --platform=all -p always",
-    "buildWin32": "electron-packager . 'Flash Player' --platform=win32 --arch=ia32 --overwrite --icon=icon.ico --production --prune -p always",
-    "buildWin64": "electron-packager . 'Flash Player' --platform=win --overwrite --icon=icon.ico -p always --prune-license nm-prune --force",
-    "macos": "electron-packager . 'Flash Player' --platform=darwin --arch=x64 --overwrite --icon=icon.ico --production --prune -p always --out=builds"
+    "buildWin32": "electron-packager . 'Flash Player' --platform=win32 --arch=ia32 --overwrite --icon=icon.ico --production --prune -p always --publish=never",
+    "buildWin64": "electron-packager . 'Flash Player' --platform=win --overwrite --icon=icon.ico -p always --prune-license nm-prune --force --publish=never",
+    "macos": "electron-packager . 'Flash Player' --platform=darwin --arch=x64 --overwrite --icon=icon.ico --production --prune -p always --out=builds --publish=never"
   },
   "devDependencies": {
     "electron": "^11.5.0",
