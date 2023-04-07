@@ -139,3 +139,4 @@ dist
 .svelte-kit
 Flashplayer-win32-x64/
 Flash Player-linux-x64/
+release-builds/
