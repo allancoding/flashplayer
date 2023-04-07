@@ -89,8 +89,7 @@
     "electron-packager": "^17.1.1",
     "electron-winstaller": "^5.1.0",
     "electron-installer-dmg": "^4.0.0",
-    "electron-installer-debian": "3.1.0",
-    "dmg-license": "^1.0.0"
+    "electron-installer-debian": "3.1.0"
   },
   "dependencies": {
     "electron-storage": "^1.0.7"
