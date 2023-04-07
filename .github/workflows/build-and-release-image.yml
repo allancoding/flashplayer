@@ -20,7 +20,7 @@ jobs:
         run: |
           npm run appimage
       - name: Install Fish
-        run: sudo apt update && sudo apt install fish && chsh /bin/fish
+        run: sudo apt update && sudo apt install fish && fish
       - name: Make AppImage dir 
         run: mkdir -p finalAppImage/ && mv ./dist/Flash-Player.*.*.*.AppImage ./finalAppImage/
       - name: Upload Artifact
