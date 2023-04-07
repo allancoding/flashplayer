@@ -1,13 +1,12 @@
 const electron = require('electron');
 const path = require('path');
 const { app, BrowserWindow, Menu, ipcMain } = electron;
-const prompt = require('electron-prompt');
 const Store = require('./settings.js');
 
 const settings = new Store({
 	configName: 'user-preferences',
 	defaults: {
-	  windowBounds: { width: 800, height: 600 },
+	  windowBounds: { width: 800, height: 650 },
 	  windowRatio: 4/3
 	}
   });
@@ -84,7 +83,6 @@ function showHideDev(win){
 		IsDevOpen = true;
 	}
 }
-
 app.on('ready', function () {
 	var menu = Menu.buildFromTemplate([{
 		label: 'Flash Player Menu',
@@ -103,8 +101,13 @@ app.on('ready', function () {
 			submenu: [{
 				label: 'Full Screen',
 				click() {
-					win.setFullScreen(true);
-					win.webContents.send('fullscreen', true);
+					if(win.isFullScreen()){
+						win.setFullScreen(false);
+						win.webContents.send('fullscreen', false);
+					}else{
+						win.setFullScreen(true);
+						win.webContents.send('fullscreen', true);
+					}
 				}
 			},{
 				label: '1:1',
@@ -112,13 +115,7 @@ app.on('ready', function () {
 					winratio = 1/1;
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
-				}
-			},{
-				label: '2:3',
-				click() {
-					winratio = 2/3;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
+					win.setSize(650,650);
 				}
 			},{
 				label: '3:2',
@@ -126,6 +123,8 @@ app.on('ready', function () {
 					winratio = 3/2;
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
+					let { width } = win.getBounds();
+					win.setSize(width,650);
 				}
 			},{
 				label: '4:3',
@@ -133,6 +132,8 @@ app.on('ready', function () {
 					winratio = 4/3;
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
+					let { width } = win.getBounds();
+					win.setSize(width,650);
 				}
 			},{
 				label: '16:9',
@@ -140,13 +141,8 @@ app.on('ready', function () {
 					winratio = 16/9;
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
-				}
-			},{
-				label: '9:16',
-				click() {
-					winratio = 9/16;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
+					let { width } = win.getBounds();
+					win.setSize(width,650);
 				}
 			}]
 		},{
@@ -189,6 +185,10 @@ app.on('ready', function () {
 	});
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);
+	win.setAspectRatio(winratio);
+	if(winratio == 1/1){
+		win.setSize(650,650);
+	}
 	ipcMain.on('setUrl', (event, url, type) => {
 		const webContents = event.sender
 		const win = BrowserWindow.fromWebContents(webContents)
@@ -204,7 +204,6 @@ app.on('ready', function () {
 		if(win.isFullScreen() == false){
 		let { width, height } = win.getBounds();
 		settings.set('windowBounds', { width, height });
-		win.setAspectRatio(winratio);
 		}
 	});
 	app.on('browser-window-focus', () => {
