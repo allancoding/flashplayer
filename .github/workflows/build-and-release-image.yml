@@ -19,7 +19,7 @@ jobs:
       - name: Install build files
         run: sudo apt update && sudo apt install elfutils && sudo apt install rpm
       - name: Make Binaries!
-        run: npm run make && npm run appimage
+        run: npm run make
 
   build-windows:
      name: Build latest push on Windows
