@@ -58,7 +58,7 @@ module.exports = {
   config: {
     options: {
       name: "flash-flayer",
-      bin: "app",
+      bin: "flash-player",
       productName: "Flash Player",
       genericName: "Flash Player",
       categories: [ "Utility" ],
