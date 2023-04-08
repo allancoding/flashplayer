@@ -19,7 +19,6 @@ module.exports = {
       config: {},
     },
     { name: '@electron-forge/maker-pkg', config: {}},
-    { name: '@electron-forge/maker-flatpak', config: { options: { categories: ['Video'], mimeType: ['video/h264'] }} },
     { name: '@rabbitholesyndrome/electron-forge-maker-portable' }
   ],
 };
