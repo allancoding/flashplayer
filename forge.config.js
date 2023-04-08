@@ -53,6 +53,10 @@ module.exports = {
       }
     },{ name: '@electron-forge/maker-pkg', config: {
       //keychain: 'my-secret-ci-keychain'
-    }},{ name: 'electron-forge-maker-appimage' }
+    }},{
+      name: 'electron-forge-maker-appimage',
+      platforms: ['linux'],
+      config: { template: 'assets/AppRunTemplate.sh' }
+    }
   ],
 };
