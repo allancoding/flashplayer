@@ -17,7 +17,7 @@ jobs:
         run: |
           npm i
       - name: Install build files
-        run: sudo apt update && sudo apt install flatpak-builder && sudo apt install elfutils && sudo apt install rpmbuild
+        run: sudo apt update && sudo apt install flatpak-builder && sudo apt install elfutils && sudo apt install rpm
       - name: Configure flatpak
         run: flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
       - name: Make Binaries!
