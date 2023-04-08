@@ -13,19 +13,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19'
-      - name: Install Packages
+      - name: Install dependencies
         run: |
           npm i
-      - name: Build appimage
-        run: |
-          npm run appimage
-      - name: Make AppImage dir
-        run: mkdir -p finalAppImage/ && mv ./dist/Flash\ Player-*.AppImage ./finalAppImage/
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: appimage
-          path: finalAppImage/
+      - name: Install build files
+        run: sudo apt update && sudo apt install flatpak-builder && sudo apt install elfutils && sudo apt install rpmbuild
+      - name: Configure flatpak
+        run: flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+      - name: Make Binaries!
+        run: npm run make && npm run appimage
 
   build-windows:
      name: Build latest push on Windows
@@ -40,4 +36,4 @@ jobs:
          run: npm i
        - name: Build for Window
          shell: bash
-         run: npm run windows
+         run: npm run make
