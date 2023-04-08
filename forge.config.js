@@ -55,8 +55,7 @@ module.exports = {
       //keychain: 'my-secret-ci-keychain'
     }},{
       name: 'electron-forge-maker-appimage',
-      platforms: ['linux'],
-      config: { template: 'assets/AppRunTemplate.sh' }
+      platforms: ['linux']
     }
   ],
 };
