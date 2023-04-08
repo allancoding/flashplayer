@@ -54,8 +54,19 @@ module.exports = {
     },{ name: '@electron-forge/maker-pkg', config: {
       //keychain: 'my-secret-ci-keychain'
     }},{
-      name: 'electron-forge-maker-appimage',
-      platforms: ['linux']
+      name: "@reforged/maker-appimage",
+  config: {
+    options: {
+      name: "Flash-Player",
+      bin: "app",
+      productName: "Flash Player",
+      genericName: "Flash Player",
+      categories: [ "Utility" ],
+      icon: "./icon.png",
+      description: "A flash player!",
+      AppImageKitRelease: "continuous"
+    }
+  }
     }
   ],
 };
