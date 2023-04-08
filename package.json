@@ -1,7 +1,8 @@
 {
   "name": "flash-player",
   "version": "1.6.3",
-  "productName": "Flash-Player",
+  "productName": "Flash Player",
+  "executableName": "flash-player",
   "description": "A flash player!",
   "license": "AGPL-3.0-only",
   "main": "main.js",

@@ -57,7 +57,7 @@ module.exports = {
       name: "@reforged/maker-appimage",
   config: {
     options: {
-      name: "Flash-Player",
+      name: "flash-flayer",
       bin: "app",
       productName: "Flash Player",
       genericName: "Flash Player",
