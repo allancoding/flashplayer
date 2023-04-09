@@ -1,7 +1,8 @@
 const electron = require('electron');
 const path = require('path');
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const { app, BrowserWindow, Menu, ipcMain, autoUpdater } = electron;
 if (require('electron-squirrel-startup')) app.quit();
+require('update-electron-app')();
 const Store = require('./settings.js');
 
 const settings = new Store({
@@ -15,7 +16,12 @@ const settings = new Store({
 let pluginName = null;
 let IsDevOpen = false;
 let winratio = settings.get('windowRatio');
-
+const isDev = require('electron-is-dev');
+if (!isDev) {
+	const server = 'https://update.electronjs.org'
+	const feed = `${server}/PrismNet/flashplayer/${process.platform}-${process.arch}/${app.getVersion()}`
+	autoUpdater.setFeedURL(feed)
+}
 switch (process.platform) {
 	case 'win32':
 		switch (process.arch) {
@@ -237,3 +243,6 @@ app.on('will-quit', function(){
 app.on('browser-window-blur', () => {
   electron.globalShortcut.unregisterAll()
 })
+setInterval(() => {
+	autoUpdater.checkForUpdates()
+}, 10 * 60 * 1000);
