@@ -9,7 +9,8 @@ module.exports = {
           owner: 'PrismNet',
           name: 'flashplayer'
         },
-        prerelease: false
+        prerelease: false,
+        authToken: GITHUB_TOKEN,
       }
     }
   ],

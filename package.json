@@ -74,24 +74,27 @@
     "start": "electron-forge start",
     "appimage": "electron-builder build --linux AppImage --publish=never",
     "package": "electron-forge package",
+    "publish": "electron-forge publish",
     "make": "electron-forge make"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.1.1",
     "@electron-forge/maker-deb": "^6.1.1",
+    "@electron-forge/maker-dmg": "^6.1.1",
     "@electron-forge/maker-pkg": "^6.1.1",
     "@electron-forge/maker-rpm": "^6.1.1",
     "@electron-forge/maker-squirrel": "^6.1.1",
     "@electron-forge/maker-zip": "^6.1.1",
     "@electron-forge/publisher-github": "^6.1.1",
-    "@electron-forge/maker-dmg": "^6.1.1",
-    "@reforged/maker-appimage": "^3.1.13",
     "@rabbitholesyndrome/electron-forge-maker-portable": "^0.1.1",
+    "@reforged/maker-appimage": "^3.1.13",
     "electron": "^11.5.0",
     "electron-builder": "^23.6.0"
   },
   "dependencies": {
+    "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-storage": "^1.0.7"
+    "electron-storage": "^1.0.7",
+    "update-electron-app": "^2.0.1"
   }
 }
