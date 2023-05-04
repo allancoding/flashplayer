@@ -142,3 +142,4 @@ Flash Player-linux-x64/
 release-builds/
 
 out/
+package-lock.json
