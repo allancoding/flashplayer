@@ -247,7 +247,15 @@ app.on('web-contents-created', (e, webContents) => {
   webContents.on('will-redirect', (e, url) => {
     if (/^file:/.test(url)) e.preventDefault()
   })
-})
+});
+app.on('web-contents-created', (event, webContents) => {
+	webContents.on('select-bluetooth-device', (event, devices, callback) => {
+	  // Prevent default behavior
+	  event.preventDefault();
+	  // Cancel the request
+	  callback('');
+	});
+});
 setInterval(() => {
 	autoUpdater.checkForUpdates()
 }, 10 * 60 * 1000);
