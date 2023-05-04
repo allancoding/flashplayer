@@ -6,12 +6,14 @@
 
 This is a flashplayer that works with a bowser using flash version 32 the last update before it was discontinued.
 
-## Run dev
+## Development
 
-```
+```bash
 npm i
 npm start
 ```
 
+### More docs coming soon
 
-<sup>This is preinstalled in [PrismOS](https://github.com/PrismNet)</sub>
+---
+####  This is preinstalled in [PrismOS](https://github.com/PrismNet)
