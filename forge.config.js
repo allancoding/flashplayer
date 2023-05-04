@@ -1,12 +1,14 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: '/icon',
+  },
   rebuildConfig: {},
   // publishers: [
   //   {
   //     name: '@electron-forge/publisher-github',
   //     config: {
   //       repository: {
-  //         owner: 'PrismNet',
+  //         owner: 'allancoding',
   //         name: 'flashplayer'
   //       },
   //       prerelease: false,
@@ -17,40 +19,48 @@ module.exports = {
   makers: [{
       name: '@electron-forge/maker-squirrel',
       config: {
-        authors: 'PrismNet',
+        authors: 'allancoding',
         description: 'A flash player!',
         //certificateFile: './cert.pfx',
         //certificatePassword: process.env.CERTIFICATE_PASSWORD
+        iconUrl: 'https://raw.githubusercontent.com/allancoding/flashplayer/master/icon.ico',
+        setupIcon: '/icon.ico',
       },
-    },{
+    },
+    {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin', 'linux'],
-    },{
+    },
+    {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
-          maintainer: 'PrismNet',
-          homepage: 'https://github.com/PrismNet/flashplayer'
+          maintainer: 'allancoding',
+          homepage: 'https://github.com/allancoding/flashplayer',
+          icon: '/icon.png'
         }
       },
     },{
       name: '@electron-forge/maker-dmg',
       config: {
         //background: './assets/dmg-background.png',
-        format: 'ULFO'
+        format: 'ULFO',
+        icon: '/icon.icns',
       }
     },{
       name: '@electron-forge/maker-rpm',
       config: {
         options: {
-          maintainer: 'PrismNet',
-          homepage: 'https://github.com/PrismNet/flashplayer'
+          maintainer: 'allancoding',
+          homepage: 'https://github.com/allancoding/flashplayer',
+          icon: '/icon.png'
         }
       }
     },{
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
-        appId: "net.prism.flashplayer"
+        appId: "net.prism.flashplayer",
+        icon: "/icon.ico",
       }
     },{ name: '@electron-forge/maker-pkg', config: {
       //keychain: 'my-secret-ci-keychain'
@@ -63,7 +73,7 @@ module.exports = {
       productName: "Flash Player",
       genericName: "Flash Player",
       categories: [ "Utility" ],
-      icon: "./icon.png",
+      icon: "/icon.png",
       description: "A flash player!",
       AppImageKitRelease: "continuous"
     }
