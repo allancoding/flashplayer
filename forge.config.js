@@ -24,7 +24,7 @@ module.exports = {
         //certificateFile: './cert.pfx',
         //certificatePassword: process.env.CERTIFICATE_PASSWORD
         iconUrl: 'https://raw.githubusercontent.com/allancoding/flashplayer/master/icon.ico',
-        setupIcon: '/icon.ico',
+        setupIcon: './icon.ico',
       },
     },
     {
@@ -37,7 +37,7 @@ module.exports = {
         options: {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: '/icon.png'
+          icon: './icon.png'
         }
       },
     },{
@@ -45,7 +45,7 @@ module.exports = {
       config: {
         //background: './assets/dmg-background.png',
         format: 'ULFO',
-        icon: '/icon.icns',
+        icon: './icon.icns',
       }
     },{
       name: '@electron-forge/maker-rpm',
@@ -53,14 +53,14 @@ module.exports = {
         options: {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: '/icon.png'
+          icon: './icon.png'
         }
       }
     },{
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
         appId: "net.prism.flashplayer",
-        icon: "/icon.ico",
+        icon: "./icon.ico",
       }
     },{ name: '@electron-forge/maker-pkg', config: {
       //keychain: 'my-secret-ci-keychain'
@@ -73,7 +73,7 @@ module.exports = {
       productName: "Flash Player",
       genericName: "Flash Player",
       categories: [ "Utility" ],
-      icon: "/icon.png",
+      icon: "./icon.png",
       description: "A flash player!",
       AppImageKitRelease: "continuous"
     }
