@@ -16,4 +16,6 @@ npm start
 ### More docs coming soon
 
 ---
-####  This is preinstalled in [PrismOS](https://github.com/PrismNet)
+
+##### This is preinstalled in [PrismOS](https://github.com/PrismNet)
+##### The swf games for this repo are in the repo [https://github.com/Miststorm/swfFiles](https://github.com/Miststorm/swfFiles)
