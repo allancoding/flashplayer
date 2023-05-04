@@ -189,7 +189,7 @@ app.on('ready', function () {
 			nodeIntegration: true,
 			nativeWindowOpen: true
 		},
-        icon: '/icon'
+        icon: './icon'
 	});
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);
