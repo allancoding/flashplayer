@@ -59,6 +59,7 @@
             margin: 4px 2px;
             font-family: inherit;
             transition-duration: 0.4s;
+            width: 250px;
         }
         button:hover {
             background-color: #550000;
@@ -100,12 +101,21 @@
         </div>
 </div>
 <script>
+const flashurl = document.getElementById('flashurl');
+    flashurl.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        openurl();
+    }
+});
 const flashopen = document.getElementById('flashopen');
-flashopen.addEventListener('click', () => {
+function openurl(){
     var url = document.getElementById('flashurl').value;
     window.electronAPI.setUrl(url, "url");
     document.getElementById("main").classList.remove("gradient-background");
     document.getElementById('start').style.display = "none"
+}
+flashopen.addEventListener('click', () => {
+    openurl();
 });
 const flashdemo = document.getElementById('flashdemo');
 flashdemo.addEventListener('click', () => {
