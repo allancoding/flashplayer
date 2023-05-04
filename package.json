@@ -7,11 +7,15 @@
   "license": "AGPL-3.0-only",
   "main": "main.js",
   "author": {
-    "name": "Prism Net",
-    "url": "https://github.com/PrismNet"
+    "name": "Allan Niles",
+    "url": "https://github.com/allancoding"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allancoding/flashplayer"
   },
   "build": {
-    "appId": "net.prismos.flashplayer",
+    "appId": "net.allancoding.flashplayer",
     "files": [
       "./flash/**/*",
       "./*.js",

@@ -1,19 +1,19 @@
 module.exports = {
   packagerConfig: {},
   rebuildConfig: {},
-  publishers: [
-    {
-      name: '@electron-forge/publisher-github',
-      config: {
-        repository: {
-          owner: 'PrismNet',
-          name: 'flashplayer'
-        },
-        prerelease: false,
-        authToken: $GITHUB_TOKEN,
-      }
-    }
-  ],
+  // publishers: [
+  //   {
+  //     name: '@electron-forge/publisher-github',
+  //     config: {
+  //       repository: {
+  //         owner: 'PrismNet',
+  //         name: 'flashplayer'
+  //       },
+  //       prerelease: false,
+  //       authToken: $GITHUB_TOKEN,
+  //     }
+  //   }
+  // ],
   makers: [{
       name: '@electron-forge/maker-squirrel',
       config: {
