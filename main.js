@@ -19,7 +19,7 @@ let winratio = settings.get('windowRatio');
 const isDev = require('electron-is-dev');
 if (!isDev) {
 	const server = 'https://update.electronjs.org'
-	const feed = `${server}/PrismNet/flashplayer/${process.platform}-${process.arch}/${app.getVersion()}`
+	const feed = `${server}/allancoding/flashplayer/${process.platform}-${process.arch}/${app.getVersion()}`
 	autoUpdater.setFeedURL(feed)
 }
 switch (process.platform) {
@@ -188,7 +188,8 @@ app.on('ready', function () {
 			preload: path.join(__dirname, 'preload.js'),
 			nodeIntegration: true,
 			nativeWindowOpen: true
-		}
+		},
+        icon: '/icon'
 	});
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);
