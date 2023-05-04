@@ -242,6 +242,11 @@ app.on('will-quit', function(){
 });
 app.on('browser-window-blur', () => {
   electron.globalShortcut.unregisterAll()
+});
+app.on('web-contents-created', (e, webContents) => {
+  webContents.on('will-redirect', (e, url) => {
+    if (/^file:/.test(url)) e.preventDefault()
+  })
 })
 setInterval(() => {
 	autoUpdater.checkForUpdates()
