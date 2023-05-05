@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    icon: '/icon',
+    icon: './icon',
   },
   rebuildConfig: {},
   // publishers: [
@@ -68,8 +68,8 @@ module.exports = {
       name: "@reforged/maker-appimage",
   config: {
     options: {
-      name: "flash-flayer",
-      bin: "flash-player",
+      name: "Flashflayer",
+      bin: "flashplayer",
       productName: "Flash Player",
       genericName: "Flash Player",
       categories: [ "Utility" ],
