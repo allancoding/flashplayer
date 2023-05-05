@@ -158,7 +158,7 @@ app.on('ready', function () {
 				promptClearCache(win);
 			}
 		},{
-			label: 'Dev Tool',
+			label: 'Dev Tools',
 			click() {
 				showHideDev(win);
 			}
