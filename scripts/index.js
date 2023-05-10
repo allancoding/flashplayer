@@ -59,11 +59,27 @@ function fileSelectInput(){
     input.click();
 }
 function urlGameInput(uri) {
-    window.electronAPI.setUrl(uri, "url");
+    //window.electronAPI.setUrl(uri, "url");
     //openGame(uri, "Flash Player", "url");
+    //get the mime type of the file
+    getMimeType(uri).then((mime) => {
+        switch(mime){
+            case "application/x-shockwave-flash":
+                openGame(uri, "Flash Player", "url");
+                break;
+            default:
+                window.electronAPI.setUrl(uri, "url");
+        }
+    });
 }
 function demo() {
     window.electronAPI.setUrl("./demo/btd5.html", "file");
+}
+
+async function getMimeType(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return blob.type;
 }
 
 
