@@ -10,6 +10,14 @@ function declareVariables(){
     flashgames = document.getElementById('flashlist');
     flashinput = document.getElementById('flashinput');
 }
+function defineEventListeners() {
+    flashurl.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            urlGameInput(flashurl.value);
+        }
+    });
+}
 //window.electronAPI.setUrl("./demo/btd5.html", "file");
 async function getData(document){
     const api_url = "https://api.github.com/repos/Miststorm/swfFiles/contents/games";
@@ -85,16 +93,10 @@ async function getMimeType(url) {
     return blob.type;
 }
 
-
 //init function (called when the page is loaded)
 async function init(){
     declareVariables();
+    defineEventListeners();
     await getData(document);
-    flashurl.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          urlGameInput(flashurl.value);
-        }
-      });
 }
 window.onload = function(){ init() }
