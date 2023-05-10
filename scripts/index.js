@@ -58,6 +58,9 @@ function fileSelectInput(){
     }
     input.click();
 }
+function urlbutton(){
+    urlGameInput(flashurl.value);
+}
 function urlGameInput(uri) {
     //window.electronAPI.setUrl(uri, "url");
     //openGame(uri, "Flash Player", "url");
@@ -87,5 +90,11 @@ async function getMimeType(url) {
 async function init(){
     declareVariables();
     await getData(document);
+    flashurl.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          urlGameInput(flashurl.value);
+        }
+      });
 }
 window.onload = function(){ init() }
