@@ -96,7 +96,7 @@ app.on('ready', function () {
 		submenu: [{
 			label: 'Change Swf File',
 			click() {
-				win.loadFile('index.html');
+				win.loadFile('./index.html');
 			}
 		},{
 			label: 'Reload Page',
@@ -189,7 +189,7 @@ app.on('ready', function () {
 			nodeIntegration: true,
 			nativeWindowOpen: true
 		},
-        icon: './icon'
+        icon: './icon.ico'
 	});
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);

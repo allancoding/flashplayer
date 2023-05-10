@@ -93,7 +93,8 @@
     "@rabbitholesyndrome/electron-forge-maker-portable": "^0.1.1",
     "@reforged/maker-appimage": "^3.1.13",
     "electron": "^11.5.0",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^23.6.0",
+    "electron-reloader": "^1.2.3"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
