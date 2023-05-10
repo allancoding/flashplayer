@@ -59,7 +59,8 @@ function fileSelectInput(){
     input.click();
 }
 function urlGameInput(uri) {
-    openGame(uri, "Flash Player", "url");
+    window.electronAPI.setUrl(uri, "url");
+    //openGame(uri, "Flash Player", "url");
 }
 function demo() {
     window.electronAPI.setUrl("./demo/btd5.html", "file");
