@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="en" xml:lang="en">
 	<head>
 		<title>Swf</title>
 		<style>
@@ -15,8 +15,9 @@
 		<script type="text/javascript">
             let url = new URLSearchParams(window.location.search);
             let file = url.get('file');
-            let name = url.get('name');
+            let name = url.get('title');
             let type = url.get('type');
+            console.log(name);
             document.title = name;
             window.onload = function() {
                 swfobject.embedSWF(file, "flashContent", "100%", "100%", "9.0.0", '', null, {wmode: 'direct', quality: 'high', allowScriptAccess: 'always', align: 'middle', scale: 'exactfit'})

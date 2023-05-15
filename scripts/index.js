@@ -1,6 +1,4 @@
-//This script belongs to the index.html file (the main page of the application) DO NOT USE IT IN OTHER PAGES
-//Author: MotorTruck1221 (https://github.com/motortruck1221)
-
+//This script belongs to the index.html file (the main page of the application)
 //Declaring various variables
 let flashurl, flashfile, flashopen, flashgames, flashinput;
 function declareVariables(){
@@ -27,7 +25,7 @@ async function getData(document){
     obj.map((item) => {
         if(item.name != "README.md"){
             item.name = item.name.replace(".swf", "");
-            document.getElementById("flashlinks").innerHTML += `<a href="#" style="text-decoration: none; color: white;" onclick="openGame('https://cdn.jsdelivr.net/gh/Miststorm/swfFiles/${item.path}', '${item.name}', 'url')">${item.name}</a><br>`;
+            document.getElementById("flashlinks").innerHTML += `<a href="#" style="text-decoration: none; color: white;" class="swflinks"  onclick="openGame('https://cdn.jsdelivr.net/gh/Miststorm/swfFiles/${item.path}', '${item.name}', 'url')">${item.name}</a><br>`;
         }
     });
 }
