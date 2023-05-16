@@ -17,10 +17,13 @@
             let file = url.get('file');
             let name = url.get('title');
             let type = url.get('type');
-            console.log(name);
             document.title = name;
             window.onload = function() {
                 swfobject.embedSWF(file, "flashContent", "100%", "100%", "9.0.0", '', null, {wmode: 'direct', quality: 'high', allowScriptAccess: 'always', align: 'middle', scale: 'exactfit'})
+            }
+            window.electronAPI.fullscreen(handleFullscreen);
+            function handleFullscreen(...args) {
+                console.log('Fullscreen event received:', args[0]);
             }
         </script>
 	</head>

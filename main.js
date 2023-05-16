@@ -104,16 +104,21 @@ app.on('ready', function () {
 				win.reload();
 			}
 		},{
+			label: 'Go Back',
+			click() {
+				win.webContents.goBack();
+			}
+		},{
 			label: 'View',
 			submenu: [{
 				label: 'Full Screen',
 				click() {
 					if(win.isFullScreen()){
 						win.setFullScreen(false);
-						win.webContents.send('fullscreen', false);
+						win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
 					}else{
 						win.setFullScreen(true);
-						win.webContents.send('fullscreen', true);
+						win.webContents.send('fullscreen', {true,settings.get('windowRatio')});
 					}
 				}
 			},{
@@ -153,16 +158,19 @@ app.on('ready', function () {
 				}
 			}]
 		},{
-			label: 'Clear Cache',
-			click() {
-				promptClearCache(win);
-			}
+			label: 'Advanced',
+			submenu: [{
+				label: 'Clear Cache',
+				click() {
+					promptClearCache(win);
+				}
+			},{
+				label: 'Dev Tools',
+				click() {
+					showHideDev(win);
+				}
+			}]
 		},{
-			label: 'Dev Tools',
-			click() {
-				showHideDev(win);
-			}
-		}, {
 			label: 'Exit',
 			click() {
 				app.quit()
@@ -217,15 +225,15 @@ app.on('ready', function () {
 	app.on('browser-window-focus', () => {
 	electron.globalShortcut.register('Escape', function(){
 		win.setFullScreen(false);
-		win.webContents.send('fullscreen', false);
+		win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
 	});
 	electron.globalShortcut.register('CommandOrControl+F', function(){
 		if(win.isFullScreen()){
 			win.setFullScreen(false);
-			win.webContents.send('fullscreen', false);
+			win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
 		}else{
 			win.setFullScreen(true);
-			win.webContents.send('fullscreen', true);
+			win.webContents.send('fullscreen', {true,settings.get('windowRatio')});
 		}
 	});
 	});

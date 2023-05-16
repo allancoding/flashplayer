@@ -68,10 +68,10 @@ module.exports = {
       name: "@reforged/maker-appimage",
   config: {
     options: {
-      name: "Flashflayer",
+      name: "flashflayer",
       bin: "flashplayer",
-      productName: "Flash Player",
-      genericName: "Flash Player",
+      productName: "Flashplayer",
+      genericName: "Flashplayer",
       categories: [ "Utility" ],
       icon: "./icon.png",
       description: "A flash player!",
