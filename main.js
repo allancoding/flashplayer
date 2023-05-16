@@ -115,10 +115,10 @@ app.on('ready', function () {
 				click() {
 					if(win.isFullScreen()){
 						win.setFullScreen(false);
-						win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
+						win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
 					}else{
 						win.setFullScreen(true);
-						win.webContents.send('fullscreen', {true,settings.get('windowRatio')});
+						win.webContents.send('fullscreen', {full: true,ratio: settings.get('windowRatio')});
 					}
 				}
 			},{
@@ -128,6 +128,7 @@ app.on('ready', function () {
 					win.setAspectRatio(winratio);
 					settings.set('windowRatio', winratio);
 					win.setSize(650,650);
+					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
 				}
 			},{
 				label: '3:2',
@@ -137,6 +138,7 @@ app.on('ready', function () {
 					settings.set('windowRatio', winratio);
 					let { width } = win.getBounds();
 					win.setSize(width,650);
+					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
 				}
 			},{
 				label: '4:3',
@@ -146,6 +148,7 @@ app.on('ready', function () {
 					settings.set('windowRatio', winratio);
 					let { width } = win.getBounds();
 					win.setSize(width,650);
+					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
 				}
 			},{
 				label: '16:9',
@@ -155,6 +158,7 @@ app.on('ready', function () {
 					settings.set('windowRatio', winratio);
 					let { width } = win.getBounds();
 					win.setSize(width,650);
+					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
 				}
 			}]
 		},{
@@ -215,7 +219,24 @@ app.on('ready', function () {
 		}else{
 			console.log('LOOKS LIKE WE RAN INTO AN ERROR: ');
 		}
-	  })
+	})
+	ipcMain.on('askfull', (event, url, type) => {
+		const webContents = event.sender
+		const win = BrowserWindow.fromWebContents(webContents)
+		win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+	})
+	ipcMain.on('setRatio', (event, winratio) => {
+		const webContents = event.sender
+		const win = BrowserWindow.fromWebContents(webContents)
+		win.setAspectRatio(winratio);
+		settings.set('windowRatio', winratio);
+		let { width } = win.getBounds();
+		if(winratio == 1){
+			win.setSize(650,650);
+		}else{
+			win.setSize(width,650);
+		}
+	})
 	win.on('resize', () => {
 		if(win.isFullScreen() == false){
 		let { width, height } = win.getBounds();
@@ -225,15 +246,15 @@ app.on('ready', function () {
 	app.on('browser-window-focus', () => {
 	electron.globalShortcut.register('Escape', function(){
 		win.setFullScreen(false);
-		win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
+		win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
 	});
 	electron.globalShortcut.register('CommandOrControl+F', function(){
 		if(win.isFullScreen()){
 			win.setFullScreen(false);
-			win.webContents.send('fullscreen', {false,settings.get('windowRatio')});
+			win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
 		}else{
 			win.setFullScreen(true);
-			win.webContents.send('fullscreen', {true,settings.get('windowRatio')});
+			win.webContents.send('fullscreen', {full: true,ratio: settings.get('windowRatio')});
 		}
 	});
 	});

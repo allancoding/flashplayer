@@ -21,15 +21,25 @@
             window.onload = function() {
                 swfobject.embedSWF(file, "flashContent", "100%", "100%", "9.0.0", '', null, {wmode: 'direct', quality: 'high', allowScriptAccess: 'always', align: 'middle', scale: 'exactfit'})
             }
+            window.electronAPI.askfull();
             window.electronAPI.fullscreen(handleFullscreen);
             function handleFullscreen(...args) {
-                console.log('Fullscreen event received:', args[0]);
+                if(args[0].full == true){
+                    let height = document.getElementById('flashContent').clientHeight;
+                    console.log(height);
+                    document.getElementById('flashContent').style.width = height*args[0].ratio + 'px';
+                }else if(args[0].full == false){
+                    window.electronAPI.setRatio(args[0].ratio);
+                    document.getElementById('flashContent').style.width = '100%';
+                }
             }
-        </script>
+        </script> 
 	</head>
 	<body>
+        <center>
 		<div id="flashContent">
 			Error!
 		</div>
+        </center>
 	</body>
 </html>
