@@ -4,7 +4,6 @@ const { app, BrowserWindow, Menu, ipcMain, autoUpdater } = electron;
 if (require('electron-squirrel-startup')) app.quit();
 require('update-electron-app')();
 const Store = require('./settings.js');
-
 const settings = new Store({
 	configName: 'user-preferences',
 	defaults: {
@@ -21,6 +20,13 @@ if (!isDev) {
 	const server = 'https://update.electronjs.org'
 	const feed = `${server}/allancoding/flashplayer/${process.platform}-${process.arch}/${app.getVersion()}`
 	autoUpdater.setFeedURL(feed)
+}
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient('flashplayer', process.execPath, [path.resolve(process.argv[1])])
+  }
+} else {
+  app.setAsDefaultProtocolClient('flashplayer')
 }
 switch (process.platform) {
 	case 'win32':
@@ -204,35 +210,8 @@ app.on('ready', function () {
 			runHelp();
 		}
 	}]);
-
 	Menu.setApplicationMenu(menu);
-
-	let { width, height } = settings.get('windowBounds');
-	let win = new BrowserWindow({
-		title: "Flash Player",
-		width: width,
-		height: height,
-		minWidth: 200, minHeight: 200,
-		show: false,
-		transparent: false,
-		center: true,
-		webPreferences: {
-			devTools: true,
-			contextIsolation: true,
-			plugins: true,
-			preload: path.join(__dirname, 'preload.js'),
-			nodeIntegration: true,
-			nativeWindowOpen: true
-		},
-		icon: path.join(__dirname, 'icon.ico')
-	});
-	win.loadFile('index.html');
-	setTimeout(() => { win.show() }, 1000);
-	win.setAspectRatio(winratio);
-	win.setMenuBarVisibility(true);
-	if(winratio == 1/1){
-		win.setSize(650,650);
-	}
+	createWindow();
 	ipcMain.on('setUrl', (event, url, type) => {
 		const webContents = event.sender
 		const win = BrowserWindow.fromWebContents(webContents)
@@ -301,11 +280,70 @@ app.on('ready', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	})
 })
+function createWindow(){
+	let { width, height } = settings.get('windowBounds');
+	let win = new BrowserWindow({
+		title: "Flash Player",
+		width: width,
+		height: height,
+		minWidth: 200, minHeight: 200,
+		show: false,
+		transparent: false,
+		center: true,
+		webPreferences: {
+			devTools: true,
+			contextIsolation: true,
+			plugins: true,
+			preload: path.join(__dirname, 'preload.js'),
+			nodeIntegration: true,
+			nativeWindowOpen: true
+		},
+		icon: path.join(__dirname, 'icon.ico')
+	});
+	win.loadFile('index.html');
+	setTimeout(() => { win.show() }, 1000);
+	win.setAspectRatio(winratio);
+	win.setMenuBarVisibility(true);
+	if(winratio == 1/1){
+		win.setSize(650,650);
+	}
+}
+const gotTheLock = app.requestSingleInstanceLock()
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (win) {
+      if (win.isMinimized()) win.restore()
+      win.focus()
+    }
+    // the commandLine is array of strings in which last element is deep link url
+    // the url str ends with /
+    dialog.showErrorBox('Welcome Back', `You arrived from: ${commandLine.pop().slice(0, -1)}`)
+  })
+
+  // Create mainWindow, load the rest of the app, etc...
+  app.whenReady().then(() => {
+    createWindow()
+  })
+}
+app.whenReady().then(() => {
+  createWindow();
+})
+app.on('open-url', (event, url) => {
+  dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
+})
 app.on('window-all-closed', () => {
 	if( process.platform !== 'darwin' ) {
         app.quit();
     }
 });
+ipcMain.on('shell:open', () => {
+  const pageDirectory = __dirname.replace('app.asar', 'app.asar.unpacked')
+  const pagePath = path.join('file://', pageDirectory, 'index.html')
+  shell.openExternal(pagePath)
+})
 app.on('will-quit', function(){
   electron.globalShortcut.unregisterAll();
 });

@@ -2,6 +2,10 @@ module.exports = {
   packagerConfig: {
     icon: './icon',
     executableName: 'flashplayer',
+    protocols: [{
+      name: "Flashplayer",
+      schemes: ["flashplayer"]
+    }]
   },
   rebuildConfig: {},
   // publishers: [
@@ -41,7 +45,8 @@ module.exports = {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
           icon: './icon.png',
-        }
+        },
+        mimeType: ["x-scheme-handler/flashplayer"]
       },
     },{
       name: '@electron-forge/maker-dmg',
@@ -57,7 +62,8 @@ module.exports = {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
           icon: './icon.png'
-        }
+        },
+        mimeType: ["x-scheme-handler/flashplayer"]
       }
     },{
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
@@ -79,7 +85,8 @@ module.exports = {
       icon: "./icon.png",
       description: "A flash player!",
       AppImageKitRelease: "continuous"
-    }
+    },
+    mimeType: ["x-scheme-handler/flashplayer"]
   }
     }
   ],
