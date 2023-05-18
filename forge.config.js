@@ -1,6 +1,7 @@
 module.exports = {
   packagerConfig: {
     icon: './icon',
+    executableName: 'flashplayer',
   },
   rebuildConfig: {},
   // publishers: [
@@ -36,7 +37,7 @@ module.exports = {
       config: {
         options: {
           name: "flashplayer",
-          productName: "Flashplayer",
+          productName: "flashplayer",
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
           icon: './icon.png',
