@@ -35,9 +35,11 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
+          name: "flashplayer",
+          productName: "Flashplayer",
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: './icon.png'
+          icon: './icon.png',
         }
       },
     },{
