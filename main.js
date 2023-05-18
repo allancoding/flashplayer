@@ -79,6 +79,14 @@ function promptClearCache(win){
 		}
 	}
 }
+function promptHelp(win, text){
+	let choice = electron.dialog.showMessageBoxSync({
+		type: 'info',
+		buttons: ['Ok'],
+		title: 'Flash Player - Help',
+		message: text
+	});
+}
 
 function showHideDev(win){
 	if (IsDevOpen) {
@@ -116,9 +124,11 @@ app.on('ready', function () {
 					if(win.isFullScreen()){
 						win.setFullScreen(false);
 						win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
+						win.setMenuBarVisibility(true);
 					}else{
 						win.setFullScreen(true);
 						win.webContents.send('fullscreen', {full: true,ratio: settings.get('windowRatio')});
+						win.setMenuBarVisibility(false);
 					}
 				}
 			},{
@@ -180,6 +190,11 @@ app.on('ready', function () {
 				app.quit()
 			}
 		}]
+	},{
+		label: 'Help',
+		click() {
+			runHelp();
+		}
 	}]);
 
 	Menu.setApplicationMenu(menu);
@@ -206,6 +221,7 @@ app.on('ready', function () {
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);
 	win.setAspectRatio(winratio);
+	win.setMenuBarVisibility(true);
 	if(winratio == 1/1){
 		win.setSize(650,650);
 	}
@@ -243,19 +259,34 @@ app.on('ready', function () {
 		settings.set('windowBounds', { width, height });
 		}
 	});
+	function runHelp(){
+		promptHelp(win, "- Press Command Or Control + Alt + Shift + M to hide the menu.\n- Press Command Or Control + Alt + Shift + F to fullscreen\n- To clear cache data click Menu->Advanced->Clear Cache");
+	}
 	app.on('browser-window-focus', () => {
 	electron.globalShortcut.register('Escape', function(){
 		win.setFullScreen(false);
 		win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
 	});
-	electron.globalShortcut.register('CommandOrControl+F', function(){
+	electron.globalShortcut.register('CommandOrControl+Alt+Shift+F', function(){
 		if(win.isFullScreen()){
 			win.setFullScreen(false);
 			win.webContents.send('fullscreen', {full: false,ratio: settings.get('windowRatio')});
+			win.setMenuBarVisibility(true);
 		}else{
 			win.setFullScreen(true);
 			win.webContents.send('fullscreen', {full: true,ratio: settings.get('windowRatio')});
+			win.setMenuBarVisibility(false);
 		}
+	});
+	electron.globalShortcut.register('CommandOrControl+Alt+Shift+M', function(){
+		if(win.isMenuBarVisible()){
+			win.setMenuBarVisibility(false);
+		}else{
+			win.setMenuBarVisibility(true);
+		}
+	});
+	electron.globalShortcut.register('CommandOrControl+Alt+Shift+H', function(){
+		runHelp();
 	});
 	});
 	app.on('activate', function () {
