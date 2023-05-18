@@ -1,6 +1,7 @@
 module.exports = {
   packagerConfig: {
     icon: './icon',
+    executableName: 'flashplayer',
   },
   rebuildConfig: {},
   // publishers: [
@@ -35,9 +36,11 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
+          name: "flashplayer",
+          productName: "flashplayer",
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: './icon.png'
+          icon: './icon.png',
         }
       },
     },{
