@@ -62,7 +62,6 @@ app.allowRendererProcessReuse = true;
 //app.commandLine.appendSwitch("--enable-npapi");
 //app.commandLine.appendSwitch("--enable-logging");
 //app.commandLine.appendSwitch("--log-level", 4);
-
 let mainWindow;
 function promptClearCache(win){
 	let choice = electron.dialog.showMessageBoxSync({
