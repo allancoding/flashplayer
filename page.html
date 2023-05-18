@@ -24,13 +24,13 @@
             window.electronAPI.askfull();
             window.electronAPI.fullscreen(handleFullscreen);
             function handleFullscreen(...args) {
-                if(args[0].full == true){
+                if(args[0].full == false || args[0].ratio == 0){
+                    window.electronAPI.setRatio(args[0].ratio);
+                    document.getElementById('flashContent').style.width = '100%';
+                }else if(args[0].full == true){
                     let height = document.getElementById('flashContent').clientHeight;
                     console.log(height);
                     document.getElementById('flashContent').style.width = height*args[0].ratio + 'px';
-                }else if(args[0].full == false){
-                    window.electronAPI.setRatio(args[0].ratio);
-                    document.getElementById('flashContent').style.width = '100%';
                 }
             }
         </script> 
