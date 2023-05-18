@@ -57,10 +57,11 @@ app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.allowRendererProcessReuse = true;
+//DEBUG CRAP
 //app.commandLine.appendSwitch("--enable-npapi");
 //app.commandLine.appendSwitch("--enable-logging");
 //app.commandLine.appendSwitch("--log-level", 4);
-app.allowRendererProcessReuse = true;
 
 let mainWindow;
 function promptClearCache(win){
@@ -201,7 +202,7 @@ app.on('ready', function () {
 			nodeIntegration: true,
 			nativeWindowOpen: true
 		},
-        icon: './icon.ico'
+		icon: path.join(__dirname, 'icon.ico')
 	});
 	win.loadFile('index.html');
 	setTimeout(() => { win.show() }, 1000);
