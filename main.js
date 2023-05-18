@@ -133,6 +133,14 @@ app.on('ready', function () {
 					}
 				}
 			},{
+				label: 'Resizeable',
+				click() {
+					win.setAspectRatio(0);
+					win.setResizable(true);
+					settings.set('windowRatio', 0);
+					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+				}
+			},{
 				label: '1:1',
 				click() {
 					winratio = 1/1;
@@ -318,6 +326,7 @@ app.on('web-contents-created', (event, webContents) => {
 	  callback('');
 	});
 });
-setInterval(() => {
-	autoUpdater.checkForUpdates()
-}, 10 * 60 * 1000);
+//update
+// setInterval(() => {
+// 	autoUpdater.checkForUpdates()
+// }, 10 * 60 * 1000);
