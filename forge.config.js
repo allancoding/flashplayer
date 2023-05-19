@@ -30,11 +30,12 @@ module.exports = {
         //certificatePassword: process.env.CERTIFICATE_PASSWORD
         iconUrl: 'https://raw.githubusercontent.com/allancoding/flashplayer/master/icon.ico',
         setupIcon: './icon.ico',
+        mimeType: ["x-scheme-handler/flashplayer"],
       },
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin', 'linux'],
+      platforms: ['darwin', 'linux',"window"],
     },
     {
       name: '@electron-forge/maker-deb',
@@ -68,12 +69,10 @@ module.exports = {
     },{
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
-        appId: "net.prism.flashplayer",
+        appId: "com.allancoding.flashplayer",
         icon: "./icon.ico",
       }
-    },{ name: '@electron-forge/maker-pkg', config: {
-      //keychain: 'my-secret-ci-keychain'
-    }},{
+    },{
       name: "@reforged/maker-appimage",
   config: {
     options: {
