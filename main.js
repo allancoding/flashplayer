@@ -69,6 +69,7 @@ app.allowRendererProcessReuse = true;
 //app.commandLine.appendSwitch("--enable-logging");
 //app.commandLine.appendSwitch("--log-level", 4);
 let mainWindow;
+let win;
 function promptClearCache(win){
 	let choice = electron.dialog.showMessageBoxSync({
 		type: 'question',
@@ -282,7 +283,7 @@ app.on('ready', function () {
 })
 function createWindow(){
 	let { width, height } = settings.get('windowBounds');
-	let win = new BrowserWindow({
+    win = new BrowserWindow({
 		title: "Flash Player",
 		width: width,
 		height: height,
