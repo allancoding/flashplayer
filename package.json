@@ -10,6 +10,9 @@
     "name": "Allan Niles",
     "url": "https://github.com/allancoding"
   },
+  "bin": {
+    "flashplayer": "./main.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/allancoding/flashplayer"
