@@ -54,7 +54,6 @@ module.exports = {
         backgroundColor: "#000",
         format: 'ULFO',
         category: "public.app-category.utilities"
-        icon: './icon.icns',
         window: {
           width: "400",
           height: "300"
