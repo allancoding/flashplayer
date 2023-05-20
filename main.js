@@ -17,9 +17,15 @@ let IsDevOpen = false;
 let winratio = settings.get('windowRatio');
 const isDev = require('electron-is-dev');
 if (!isDev) {
-	const server = 'https://update.electronjs.org'
-	const feed = `${server}/allancoding/flashplayer/${process.platform}-${process.arch}/${app.getVersion()}`
-	autoUpdater.setFeedURL(feed)
+	autoUpdater.setFeedURL({
+		url: 'https://github.com/allancoding/flashplayer/releases/latest',
+	});
+	autoUpdater.on('update-available', () => {
+		// Handle the update availability
+	});
+	autoUpdater.on('update-downloaded', () => {
+		// Prompt the user to install the update
+	});
 }
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
@@ -64,10 +70,6 @@ app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
 app.allowRendererProcessReuse = true;
-//DEBUG CRAP
-//app.commandLine.appendSwitch("--enable-npapi");
-//app.commandLine.appendSwitch("--enable-logging");
-//app.commandLine.appendSwitch("--log-level", 4);
 let mainWindow;
 let win;
 function promptClearCache(win){
@@ -213,6 +215,9 @@ app.on('ready', function () {
 	}]);
 	Menu.setApplicationMenu(menu);
 	createWindow();
+	if (!isDev) {
+		autoUpdater.checkForUpdates();
+	}
 	ipcMain.on('setUrl', (event, url, type) => {
 		const webContents = event.sender
 		const win = BrowserWindow.fromWebContents(webContents)
@@ -220,8 +225,6 @@ app.on('ready', function () {
 			win.loadURL(url);
 		}else if(type == "file"){
 			win.loadFile(url);
-		}else{
-			console.log('LOOKS LIKE WE RAN INTO AN ERROR: ');
 		}
 	})
 	ipcMain.on('askfull', (event, url, type) => {
@@ -281,6 +284,11 @@ app.on('ready', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	})
 })
+if (!isDev) {
+	setInterval(() => {
+		autoUpdater.checkForUpdates();
+}, 30 * 60 * 1000);
+}
 function createWindow(){
 	let { width, height } = settings.get('windowBounds');
     win = new BrowserWindow({
@@ -329,9 +337,6 @@ if (!gotTheLock) {
     createWindow()
   })
 }
-app.whenReady().then(() => {
-  createWindow();
-})
 app.on('open-url', (event, url) => {
   dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
 })
@@ -364,7 +369,3 @@ app.on('web-contents-created', (event, webContents) => {
 	  callback('');
 	});
 });
-//update
-// setInterval(() => {
-// 	autoUpdater.checkForUpdates()
-// }, 10 * 60 * 1000);

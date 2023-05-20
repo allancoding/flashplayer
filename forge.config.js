@@ -34,8 +34,7 @@ module.exports = {
       },
     },
     {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin', 'linux',"window"],
+      name: '@electron-forge/maker-zip'
     },
     {
       name: '@electron-forge/maker-deb',
@@ -52,9 +51,23 @@ module.exports = {
     },{
       name: '@electron-forge/maker-dmg',
       config: {
-        //background: './assets/dmg-background.png',
+        backgroundColor: "#000",
         format: 'ULFO',
+        category: "public.app-category.utilities"
         icon: './icon.icns',
+        window: {
+          width: "400",
+          height: "300"
+        },
+        contents: [{
+            x: 100,
+            y: 100
+        },{
+          x: 300,
+          y: 100,
+          type: "link",
+          path: "/Applications"
+        }]
       }
     },{
       name: '@electron-forge/maker-rpm',
@@ -74,19 +87,19 @@ module.exports = {
       }
     },{
       name: "@reforged/maker-appimage",
-  config: {
-    options: {
-      name: "flashflayer",
-      bin: "flashplayer",
-      productName: "Flashplayer",
-      genericName: "Flashplayer",
-      categories: [ "Utility" ],
-      icon: "./icon.png",
-      description: "A flash player!",
-      AppImageKitRelease: "continuous"
-    },
-    mimeType: ["x-scheme-handler/flashplayer"]
-  }
+      config: {
+        options: {
+          name: "flashflayer",
+          bin: "flashplayer",
+          productName: "Flashplayer",
+          genericName: "Flashplayer",
+          categories: [ "Utility" ],
+          icon: "./icon.png",
+          description: "A flash player!",
+          AppImageKitRelease: "continuous"
+        },
+        mimeType: ["x-scheme-handler/flashplayer"]
+      }
     }
   ],
 };

@@ -25,54 +25,7 @@
     ],
     "asarUnpack": [
       "./flash/**/*"
-    ],
-    "dmg": {
-      "background": null,
-      "backgroundColor": "#000",
-      "window": {
-        "width": "400",
-        "height": "300"
-      },
-      "contents": [
-        {
-          "x": 100,
-          "y": 100
-        },
-        {
-          "x": 300,
-          "y": 100,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "mac": {
-      "target": "dmg",
-      "category": "public.app-category.utilities"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
-    },
-    "linux": {
-      "target": "AppImage",
-      "category": "Utility"
-    },
-    "nsis": {
-      "installerIcon": "icon.ico",
-      "uninstallerIcon": "icon.ico",
-      "uninstallDisplayName": "Flash Player",
-      "oneClick": true,
-      "perMachine": false,
-      "artifactName": "Flash Player.${ext}"
-    }
+    ]
   },
   "scripts": {
     "start": "electron-forge start",
@@ -85,7 +38,6 @@
     "@electron-forge/cli": "^6.1.1",
     "@electron-forge/maker-deb": "^6.1.1",
     "@electron-forge/maker-dmg": "^6.1.1",
-    "@electron-forge/maker-pkg": "^6.1.1",
     "@electron-forge/maker-rpm": "^6.1.1",
     "@electron-forge/maker-squirrel": "^6.1.1",
     "@electron-forge/maker-zip": "^6.1.1",
