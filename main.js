@@ -4,6 +4,7 @@ const { app, BrowserWindow, Menu, ipcMain, autoUpdater } = electron;
 if (require('electron-squirrel-startup')) app.quit();
 require('update-electron-app')();
 const Store = require('./settings.js');
+const { version } = require('./package.json');
 const settings = new Store({
 	configName: 'user-preferences',
 	defaults: {
@@ -14,6 +15,8 @@ const settings = new Store({
 
 let pluginName = null;
 let IsDevOpen = false;
+let isUpdatePending = false;
+autoUpdater.autoDownload = false;
 let winratio = settings.get('windowRatio');
 const isDev = require('electron-is-dev');
 if (!isDev) {
@@ -21,10 +24,34 @@ if (!isDev) {
 		url: 'https://github.com/allancoding/flashplayer/releases/latest',
 	});
 	autoUpdater.on('update-available', () => {
-		// Handle the update availability
+		if (!isUpdatePending) {
+			const dialogOptions = {
+			type: 'info',
+			title: 'Update Available',
+			message: `A new version (${version}) of the app is available. Do you want to update now?`,
+			buttons: ['Update', 'Later'],
+			};
+			dialog.showMessageBox(dialogOptions).then(({ response }) => {
+			if (response === 0) {
+				isUpdatePending = true;
+				autoUpdater.downloadUpdate();
+			} else {
+				isUpdatePending = false;
+			}
+			});
+		}
 	});
 	autoUpdater.on('update-downloaded', () => {
-		// Prompt the user to install the update
+	const dialogOptions = {
+		type: 'info',
+		title: 'Update Ready',
+		message: 'An update has been downloaded and is ready to be installed. Click OK to restart the app and install the update.',
+		buttons: ['OK'],
+	};
+
+	dialog.showMessageBox(dialogOptions).then(() => {
+		autoUpdater.quitAndInstall(); // Quit and install the update
+	});
 	});
 }
 if (process.defaultApp) {
@@ -217,6 +244,9 @@ app.on('ready', function () {
 	createWindow();
 	if (!isDev) {
 		autoUpdater.checkForUpdates();
+		if (isUpdatePending) {
+			autoUpdater.downloadUpdate();
+		}
 	}
 	ipcMain.on('setUrl', (event, url, type) => {
 		const webContents = event.sender
@@ -360,6 +390,9 @@ app.on('web-contents-created', (e, webContents) => {
   webContents.on('will-redirect', (e, url) => {
     if (/^file:/.test(url)) e.preventDefault()
   })
+});
+app.on('before-quit', () => {
+  isUpdatePending = false; // Reset the flag when the app is closed
 });
 app.on('web-contents-created', (event, webContents) => {
 	webContents.on('select-bluetooth-device', (event, devices, callback) => {
