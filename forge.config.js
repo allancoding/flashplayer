@@ -54,10 +54,6 @@ module.exports = {
         backgroundColor: "#000",
         format: 'ULFO',
         category: "public.app-category.utilities"
-        window: {
-          width: "400",
-          height: "300"
-        },
         contents: [{
             x: 100,
             y: 100
