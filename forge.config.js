@@ -54,15 +54,6 @@ module.exports = {
         backgroundColor: "#000",
         format: 'ULFO',
         category: "public.app-category.utilities"
-        contents: [{
-            x: 100,
-            y: 100
-        },{
-          x: 300,
-          y: 100,
-          type: "link",
-          path: "/Applications"
-        }]
       }
     },{
       name: '@electron-forge/maker-rpm',
@@ -78,7 +69,7 @@ module.exports = {
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
         appId: "com.allancoding.flashplayer",
-        icon: "./icon.ico",
+        icon: "./icon.ico"
       }
     },{
       name: "@reforged/maker-appimage",
