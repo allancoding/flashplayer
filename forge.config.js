@@ -45,6 +45,7 @@ module.exports = {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
           icon: './icon.png',
+          bin: "flashplayer",
         },
         mimeType: ["x-scheme-handler/flashplayer"]
       },
@@ -53,6 +54,7 @@ module.exports = {
       config: {
         backgroundColor: "#000",
         format: 'ULFO',
+        bin: "flashplayer",
         category: "public.app-category.utilities"
       }
     },{
@@ -61,7 +63,8 @@ module.exports = {
         options: {
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: './icon.png'
+          icon: './icon.png',
+          bin: "flashplayer"
         },
         mimeType: ["x-scheme-handler/flashplayer"]
       }
