@@ -1,6 +1,7 @@
 const electron = require('electron');
 const path = require('path');
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const fs = require('fs');
+const { app, BrowserWindow, Menu, ipcMain, dialog} = electron;
 if (require('electron-squirrel-startup')) app.quit();
 require('update-electron-app')();
 const Store = require('./settings.js');
@@ -17,7 +18,14 @@ let pluginName = null;
 let IsDevOpen = false;
 let winratio = settings.get('windowRatio');
 const isDev = require('electron-is-dev');
-if (process.platform !== "darwin") {
+function isAppImage() {
+	const exePath = process.execPath;
+	const exeDir = path.dirname(exePath);
+	const appImagePath = path.join(exeDir, '..', '..', 'appimagetool');
+  
+	return fs.existsSync(appImagePath);
+  }
+if (process.platform !== "darwin" || !isAppImage()) {
 const { autoUpdater } = electron;
 let isUpdatePending = false;
 autoUpdater.autoDownload = false;
@@ -245,7 +253,10 @@ app.on('ready', function () {
 	}]);
 	Menu.setApplicationMenu(menu);
 	createWindow();
-	if (process.platform !== "darwin") {
+	if (process.platform == "darwin") {
+		menu.unshift({});
+	}
+	if (process.platform !== "darwin" || !isAppImage()){
 	if (!isDev) {
 		autoUpdater.checkForUpdates();
 		if (isUpdatePending) {
@@ -319,7 +330,7 @@ app.on('ready', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	})
 })
-if (process.platform !== "darwin") {
+if (process.platform !== "darwin" || !isAppImage()) {
 if (!isDev) {
 	setInterval(() => {
 		autoUpdater.checkForUpdates();
@@ -359,10 +370,13 @@ if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
+	createWindow();
     // Someone tried to run a second instance, we should focus our window.
     if (win) {
-      if (win.isMinimized()) win.restore()
-      win.focus()
+      if (win.isMinimized()) {
+	  win.restore();
+	  }
+      win.focus();
     }
     // the commandLine is array of strings in which last element is deep link url
     // the url str ends with /
