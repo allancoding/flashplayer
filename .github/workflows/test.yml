@@ -1,4 +1,4 @@
-name: Run commands on different operating systems
+name: Test
 on:
   workflow_dispatch:
 
