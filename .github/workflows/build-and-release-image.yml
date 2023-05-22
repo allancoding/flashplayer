@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.event.ref }}
         run: |
           tag=${ref##*/}
-          bash ./bash-scripts/setup.sh
+          gh release create "$tag" -p --repo="$GITHUB_REPOSITORY" --title="${GITHUB_REPOSITORY#*/} ${tag#v}" --generate-notes
 
   build-linux:
     name: Build latest push on ubuntu
