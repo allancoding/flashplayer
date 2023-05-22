@@ -7,4 +7,4 @@ git add .
 git config --global user.email "motortruck1221@protonmail.com"
 git config --global user.name "motortruck1221"
 git commit -m "Bump version to $tag"
-git push origin master
+git push -u origin main
