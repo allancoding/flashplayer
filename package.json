@@ -1,6 +1,6 @@
 {
   "name": "flashplayer",
-  "version": "v1.0.0-beta",
+  "version": "1.0.0-beta",
   "productName": "Flashplayer",
   "executableName": "flashplayer",
   "description": "A flash player!",
