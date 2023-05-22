@@ -1,10 +1,26 @@
 name: Run commands on different operating systems
 on:
   push:
-    branches: [ main ]
+    tags:
+      - v*
   workflow_dispatch:
 
-jobs:
+jobs: 
+  release:
+    name: Release Pushed Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.push.ref }}
+        run: |
+          tag=${ref##*/}
+
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --generate-notes
   build-linux:
     name: Build latest push on ubuntu
     runs-on: ubuntu-latest
@@ -52,4 +68,4 @@ jobs:
        - name: Build and publish
          run: npm run publish
          env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
