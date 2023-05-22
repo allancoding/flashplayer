@@ -17,7 +17,7 @@ module.exports = {
            name: 'flashplayer'
          },
          prerelease: false,
-         authToken: $GITHUB_TOKEN,
+         authToken: process.env.GITHUB_TOKEN
        }
      }
    ],
