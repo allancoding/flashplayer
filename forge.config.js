@@ -16,7 +16,7 @@ module.exports = {
            owner: 'allancoding',
            name: 'flashplayer'
          },
-         prerelease: false,
+         prerelease: true,
          authToken: process.env.GITHUB_TOKEN
        }
      }
