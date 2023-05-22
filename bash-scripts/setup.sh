@@ -14,8 +14,4 @@
 #         --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
 #         --generate-notes \
 # fi
-     gh release create "$tag" \
-        --repo="$GITHUB_REPOSITORY" \
-        --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-        --generate-notes \ 
-        --prerelease
+gh release create "$tag" -p --repo="$GITHUB_REPOSITORY" --title="${GITHUB_REPOSITORY#*/} ${tag#v}" --generate-notes
