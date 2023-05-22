@@ -10,17 +10,15 @@ jobs:
     name: Release Pushed Tag
     runs-on: ubuntu-latest
     steps:
-      - name: Create Release
+      - uses: actions/checkout@v3
+      - name: Setup
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.ref }}
         run: |
           tag=${ref##*/}
+          bash ./bash-scripts/setup.sh
 
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --generate-notes
   build-linux:
     name: Build latest push on ubuntu
     runs-on: ubuntu-latest
