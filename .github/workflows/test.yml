@@ -1,0 +1,18 @@
+name: Run commands on different operating systems
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+      - uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.ref }}
+        run: |
+          tag=${ref##*/}
+          bash ./bash-scripts/setup.sh
+
