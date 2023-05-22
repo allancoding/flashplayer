@@ -13,7 +13,7 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.push.ref }}
+          ref: ${{ github.event.ref }}
         run: |
           tag=${ref##*/}
 
