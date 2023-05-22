@@ -1,6 +1,6 @@
 const electron = require('electron');
 const path = require('path');
-const { app, BrowserWindow, Menu, ipcMain, autoUpdater } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 if (require('electron-squirrel-startup')) app.quit();
 require('update-electron-app')();
 const Store = require('./settings.js');
@@ -15,10 +15,12 @@ const settings = new Store({
 
 let pluginName = null;
 let IsDevOpen = false;
-let isUpdatePending = false;
-autoUpdater.autoDownload = false;
 let winratio = settings.get('windowRatio');
 const isDev = require('electron-is-dev');
+if (process.platform !== "darwin") {
+const { autoUpdater } = electron;
+let isUpdatePending = false;
+autoUpdater.autoDownload = false;
 if (!isDev) {
 	autoUpdater.setFeedURL({
 		url: 'https://github.com/allancoding/flashplayer/releases/latest',
@@ -53,6 +55,7 @@ if (!isDev) {
 		autoUpdater.quitAndInstall(); // Quit and install the update
 	});
 	});
+}
 }
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
@@ -242,11 +245,13 @@ app.on('ready', function () {
 	}]);
 	Menu.setApplicationMenu(menu);
 	createWindow();
+	if (process.platform !== "darwin") {
 	if (!isDev) {
 		autoUpdater.checkForUpdates();
 		if (isUpdatePending) {
 			autoUpdater.downloadUpdate();
 		}
+	}
 	}
 	ipcMain.on('setUrl', (event, url, type) => {
 		const webContents = event.sender
@@ -314,10 +319,12 @@ app.on('ready', function () {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	})
 })
+if (process.platform !== "darwin") {
 if (!isDev) {
 	setInterval(() => {
 		autoUpdater.checkForUpdates();
 }, 30 * 60 * 1000);
+}
 }
 function createWindow(){
 	let { width, height } = settings.get('windowBounds');
