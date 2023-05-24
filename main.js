@@ -70,7 +70,7 @@ if (process.defaultApp) {
     app.setAsDefaultProtocolClient('flashplayer', process.execPath, [path.resolve(process.argv[1])])
   }
 } else {
-  app.setAsDefaultProtocolClient('flashplayer')
+  app.setAsDefaultProtocolClient('flashplayer');
 }
 switch (process.platform) {
 	case 'win32':
@@ -252,7 +252,6 @@ app.on('ready', function () {
 		}
 	}]);
 	Menu.setApplicationMenu(menu);
-	createWindow();
 	if (process.platform == "darwin") {
 		menu.unshift({});
 	}
@@ -290,12 +289,6 @@ app.on('ready', function () {
 			win.setSize(width,650);
 		}
 	})
-	win.on('resize', () => {
-		if(win.isFullScreen() == false){
-		let { width, height } = win.getBounds();
-		settings.set('windowBounds', { width, height });
-		}
-	});
 	function runHelp(){
 		promptHelp(win, "- Press Command Or Control + Alt + Shift + M to hide the menu.\n- Press Command Or Control + Alt + Shift + F to fullscreen\n- To clear cache data click Menu->Advanced->Clear Cache");
 	}
@@ -370,27 +363,27 @@ if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
-	createWindow();
-    // Someone tried to run a second instance, we should focus our window.
     if (win) {
       if (win.isMinimized()) {
 	  win.restore();
 	  }
       win.focus();
     }
-    // the commandLine is array of strings in which last element is deep link url
-    // the url str ends with /
     dialog.showErrorBox('Welcome Back', `You arrived from: ${commandLine.pop().slice(0, -1)}`)
-  })
-
-  // Create mainWindow, load the rest of the app, etc...
-  app.whenReady().then(() => {
-    createWindow()
   })
 }
 app.on('open-url', (event, url) => {
   dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
 })
+app.whenReady().then(() => {
+    createWindow();
+	win.on('resize', () => {
+		if(win.isFullScreen() == false){
+		let { width, height } = win.getBounds();
+		settings.set('windowBounds', { width, height });
+		}
+	});
+});
 app.on('window-all-closed', () => {
 	if( process.platform !== 'darwin' ) {
         app.quit();

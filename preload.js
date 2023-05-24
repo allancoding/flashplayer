@@ -6,5 +6,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
         ipcRenderer.on("fullscreen", (event, ...args) => func(...args));
     },
     askfull: () => ipcRenderer.send('askfull'),
-    setRatio: (ratio) => ipcRenderer.send('setRatio', ratio)
-})
+    setRatio: (ratio) => ipcRenderer.send('setRatio', ratio),
+    open: () => ipcRenderer.send('shell:open')
+});
