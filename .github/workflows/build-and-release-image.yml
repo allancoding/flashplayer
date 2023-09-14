@@ -67,3 +67,20 @@ jobs:
          run: npm run publish
          env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+           
+  build-aur:
+     name: Build AUR package
+     runs-on: ubuntu-latest
+     steps:
+       - name: Publish to the AUR
+         uses: KSXGitHub/github-actions-deploy-aur@v2.7.0
+         with:
+          pkgname: flashplayer
+          pkgbuild: ./PKGBUILD
+          commit_username: ${{ secrets.AUR_USERNAME }}
+          commit_email: ${{ secrets.AUR_EMAIL }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa
+        
+            
