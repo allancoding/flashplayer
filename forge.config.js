@@ -3,23 +3,10 @@ module.exports = {
     icon: './icon',
     executableName: 'flashplayer',
     protocols: [{
-      name: "Flashplayer",
+      name: "flashplayer",
       schemes: ["flashplayer"]
     }]
   },
-  rebuildConfig: {},
-  publishers: [
-     {
-       name: '@electron-forge/publisher-github',
-       config: {
-         repository: {
-           owner: 'allancoding',
-           name: 'flashplayer'
-         },
-         authToken: process.env.GITHUB_TOKEN
-       }
-     }
-   ],
   makers: [{
       name: '@electron-forge/maker-squirrel',
       config: {

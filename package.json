@@ -1,10 +1,10 @@
 {
   "name": "flashplayer",
-  "version": "1.0.0-beta",
-  "productName": "Flashplayer",
+  "version": "1.1",
+  "productName": "flashplayer",
   "executableName": "flashplayer",
   "description": "A flash player!",
-  "license": "AGPL-3.0-only",
+  "license": "AGPL-3.0",
   "main": "main.js",
   "author": {
     "name": "Allan Niles",
@@ -18,7 +18,7 @@
     "url": "https://github.com/allancoding/flashplayer"
   },
   "build": {
-    "appId": "net.allancoding.flashplayer",
+    "appId": "dev.allancoding.flashplayer",
     "files": [
       "./flash/**/*",
       "./*.js",
@@ -41,10 +41,8 @@
     "@electron-forge/cli": "^6.1.1",
     "@electron-forge/maker-deb": "^6.1.1",
     "@electron-forge/maker-dmg": "^6.1.1",
-    "@electron-forge/maker-rpm": "^6.1.1",
     "@electron-forge/maker-squirrel": "^6.1.1",
     "@electron-forge/maker-zip": "^6.1.1",
-    "@electron-forge/publisher-github": "^6.1.1",
     "@rabbitholesyndrome/electron-forge-maker-portable": "^0.1.1",
     "@reforged/maker-appimage": "^3.1.13",
     "electron": "^11.5.0",

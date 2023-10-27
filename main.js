@@ -147,22 +147,41 @@ function showHideDev(win){
 }
 app.on('ready', function () {
 	var menu = Menu.buildFromTemplate([{
-		label: 'Flash Player Menu',
+		label: 'File',
 		submenu: [{
-			label: 'Change Swf File',
+			label: 'Home',
 			click() {
 				win.loadFile('./index.html');
 			}
 		},{
-			label: 'Reload Page',
+			label: 'Reload',
 			click() {
 				win.reload();
 			}
 		},{
-			label: 'Go Back',
+			label: 'Back',
 			click() {
 				win.webContents.goBack();
 			}
+		},{
+			label: 'Quit',
+			click() {
+				app.quit()
+			}
+		}]
+	},{
+			label: 'Advanced',
+			submenu: [{
+				label: 'Clear Cache',
+				click() {
+					promptClearCache(win);
+				}
+			},{
+				label: 'Dev Tools',
+				click() {
+					showHideDev(win);
+				}
+			}]
 		},{
 			label: 'View',
 			submenu: [{
@@ -187,65 +206,69 @@ app.on('ready', function () {
 					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
 				}
 			},{
-				label: '1:1',
-				click() {
-					winratio = 1/1;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
-					win.setSize(650,650);
-					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
-				}
-			},{
-				label: '3:2',
-				click() {
-					winratio = 3/2;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
-					let { width } = win.getBounds();
-					win.setSize(width,650);
-					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
-				}
-			},{
-				label: '4:3',
-				click() {
-					winratio = 4/3;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
-					let { width } = win.getBounds();
-					win.setSize(width,650);
-					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
-				}
-			},{
-				label: '16:9',
-				click() {
-					winratio = 16/9;
-					win.setAspectRatio(winratio);
-					settings.set('windowRatio', winratio);
-					let { width } = win.getBounds();
-					win.setSize(width,650);
-					win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
-				}
+				label: "Aspect Ratio's",
+				submenu: [{
+					label: '1:1',
+					click() {
+						winratio = 1/1;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						win.setSize(650,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				},{
+					label: '3:2',
+					click() {
+						winratio = 3/2;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						let { width } = win.getBounds();
+						win.setSize(width,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				},{
+					label: '4:3',
+					click() {
+						winratio = 4/3;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						let { width } = win.getBounds();
+						win.setSize(width,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				},{
+					label: '5:4',
+					click() {
+						winratio = 5/4;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						let { width } = win.getBounds();
+						win.setSize(width,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				},{
+					label: '16:9',
+					click() {
+						winratio = 16/9;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						let { width } = win.getBounds();
+						win.setSize(width,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				},{
+					label: '16:10',
+					click() {
+						winratio = 16/10;
+						win.setAspectRatio(winratio);
+						settings.set('windowRatio', winratio);
+						let { width } = win.getBounds();
+						win.setSize(width,650);
+						win.webContents.send('fullscreen', {full: win.isFullScreen(),ratio: settings.get('windowRatio')});
+					}
+				}]
 			}]
 		},{
-			label: 'Advanced',
-			submenu: [{
-				label: 'Clear Cache',
-				click() {
-					promptClearCache(win);
-				}
-			},{
-				label: 'Dev Tools',
-				click() {
-					showHideDev(win);
-				}
-			}]
-		},{
-			label: 'Exit',
-			click() {
-				app.quit()
-			}
-		}]
-	},{
 		label: 'Help',
 		click() {
 			runHelp();
