@@ -5,13 +5,13 @@
   "executableName": "flashplayer",
   "description": "A flash player!",
   "license": "AGPL-3.0",
-  "main": "main.js",
+  "main": "./scripts/main.js",
   "author": {
     "name": "Allan Niles",
     "url": "https://github.com/allancoding"
   },
   "bin": {
-    "flashplayer": "./main.js"
+    "flashplayer": "./scripts/main.js"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,10 @@
     "appId": "dev.allancoding.flashplayer",
     "files": [
       "./flash/**/*",
-      "./*.js",
-      "./*.html",
+      "./scripts/*",
+      "./pages/*",
       "./demo/**/*",
-      "./icon.*"
+      "./icons/*"
     ],
     "asarUnpack": [
       "./flash/**/*"
@@ -32,27 +32,28 @@
   },
   "scripts": {
     "start": "electron-forge start",
-    "appimage": "electron-builder build --linux AppImage --publish=never",
     "package": "electron-forge package",
-    "publish": "electron-forge publish",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "postinstall": "npmpd"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.1.1",
-    "@electron-forge/maker-deb": "^6.1.1",
-    "@electron-forge/maker-dmg": "^6.1.1",
-    "@electron-forge/maker-squirrel": "^6.1.1",
-    "@electron-forge/maker-zip": "^6.1.1",
-    "@rabbitholesyndrome/electron-forge-maker-portable": "^0.1.1",
-    "@reforged/maker-appimage": "^3.1.13",
+    "@electron-forge/cli": "latest",
+    "@electron-forge/maker-deb": "latest",
+    "@electron-forge/maker-dmg": "latest",
+    "@electron-forge/maker-squirrel": "latest",
+    "@electron-forge/maker-zip": "latest",
+    "@rabbitholesyndrome/electron-forge-maker-portable": "latest",
+    "@reforged/maker-appimage": "",
     "electron": "^11.5.0",
-    "electron-builder": "^23.6.0",
-    "electron-reloader": "^1.2.3"
+    "electron-reloader": "latest"
   },
   "dependencies": {
-    "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-storage": "^1.0.7",
-    "update-electron-app": "^2.0.1"
+    "electron-is-dev": "latest",
+    "electron-storage": "latest",
+    "npm-platform-dependencies": "latest",
+    "update-electron-app": "latest"
+  },
+  "win32Dependencies": {
+    "electron-squirrel-startup": "latest"
   }
 }

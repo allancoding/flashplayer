@@ -1,23 +1,24 @@
 module.exports = {
   packagerConfig: {
-    icon: './icon',
+    icon: './icons/icon.png',
     executableName: 'flashplayer',
-    protocols: [{
-      name: "flashplayer",
-      schemes: ["flashplayer"]
-    }]
+    protocols: [
+      {
+        name: "flashplayer",
+        schemes: ["flashplayer"]
+      }
+    ]
   },
-  makers: [{
+  makers: [
+    {
       name: '@electron-forge/maker-squirrel',
       config: {
         authors: 'allancoding',
         description: 'A flash player!',
-        //certificateFile: './cert.pfx',
-        //certificatePassword: process.env.CERTIFICATE_PASSWORD
         iconUrl: 'https://raw.githubusercontent.com/allancoding/flashplayer/master/icon.ico',
         setupIcon: './icon.ico',
-        mimeType: ["x-scheme-handler/flashplayer"],
-      },
+        mimeType: ["x-scheme-handler/flashplayer"]
+      }
     },
     {
       name: '@electron-forge/maker-zip'
@@ -26,7 +27,7 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
-          name: "flashplayer",
+          name: "Flashplayer",
           productName: "flashplayer",
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
@@ -34,8 +35,9 @@ module.exports = {
           bin: "flashplayer",
         },
         mimeType: ["x-scheme-handler/flashplayer"]
-      },
-    },{
+      }
+    },
+    {
       name: '@electron-forge/maker-dmg',
       config: {
         backgroundColor: "#000",
@@ -43,32 +45,23 @@ module.exports = {
         bin: "flashplayer",
         category: "public.app-category.utilities"
       }
-    },{
-      name: '@electron-forge/maker-rpm',
-      config: {
-        options: {
-          maintainer: 'allancoding',
-          homepage: 'https://github.com/allancoding/flashplayer',
-          icon: './icon.png',
-          bin: "flashplayer"
-        },
-        mimeType: ["x-scheme-handler/flashplayer"]
-      }
-    },{
+    },
+    {
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
         appId: "com.allancoding.flashplayer",
         icon: "./icon.ico"
       }
-    },{
+    },
+    {
       name: "@reforged/maker-appimage",
       config: {
         options: {
-          name: "flashflayer",
+          name: "Flashplayer",
           bin: "flashplayer",
           productName: "Flashplayer",
           genericName: "Flashplayer",
-          categories: [ "Utility" ],
+          categories: ["Utility"],
           icon: "./icon.png",
           description: "A flash player!",
           AppImageKitRelease: "continuous"
@@ -76,5 +69,5 @@ module.exports = {
         mimeType: ["x-scheme-handler/flashplayer"]
       }
     }
-  ],
+  ]
 };
