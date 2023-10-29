@@ -1,8 +1,7 @@
-<h2 align="center">
-  <img src="./icon.png">
+<div align="center"><img src="./icons/icon.png">
   
-  Flashplayer
-</h2>
+# Flashplayer
+</div>
 
 This is a flashplayer that works with a bowser using flash version 32 the last update before it was discontinued.
 
