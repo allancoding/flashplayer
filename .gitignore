@@ -140,7 +140,10 @@ dist
 Flashplayer-win32-x64/
 Flash Player-linux-x64/
 release-builds/
-
+flashplayer.crt
+flashplayer.csr
+flashplayer.key
+flashplayer.pfx
 out/
 package-lock.json
 yarn.lock

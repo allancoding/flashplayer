@@ -70,14 +70,13 @@ if (!isDev) {
       };
 
       dialog.showMessageBox(dialogOptions).then(() => {
-        autoUpdater.quitAndInstall(); // Quit and install the update
+        autoUpdater.quitAndInstall();
       });
     });
   }
 } else {
   require("electron-reloader")(module);
 }
-
 let IsDevOpen = false;
 let winratio = settings.get("windowRatio");
 let mainWindow;

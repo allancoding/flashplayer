@@ -16,7 +16,9 @@ module.exports = {
         authors: 'allancoding',
         description: 'A flash player!',
         iconUrl: 'https://raw.githubusercontent.com/allancoding/flashplayer/master/icon.ico',
-        setupIcon: './icon.ico',
+        setupIcon: './icons/icon.ico',
+        certificateFile: './flashplayer.pfx',
+        certificatePassword: process.env.CERTIFICATE_PASSWORD,
         mimeType: ["x-scheme-handler/flashplayer"]
       }
     },
@@ -31,7 +33,7 @@ module.exports = {
           productName: "flashplayer",
           maintainer: 'allancoding',
           homepage: 'https://github.com/allancoding/flashplayer',
-          icon: './icon.png',
+          icon: './icons/icon.png',
           bin: "flashplayer",
         },
         mimeType: ["x-scheme-handler/flashplayer"]
@@ -43,6 +45,7 @@ module.exports = {
         backgroundColor: "#000",
         format: 'ULFO',
         bin: "flashplayer",
+        icon: './icons/icon.icns',
         category: "public.app-category.utilities"
       }
     },
@@ -50,7 +53,7 @@ module.exports = {
       name: "@rabbitholesyndrome/electron-forge-maker-portable",
       config: {
         appId: "com.allancoding.flashplayer",
-        icon: "./icon.ico"
+        icon: "./icons/icon.ico"
       }
     },
     {
@@ -62,7 +65,7 @@ module.exports = {
           productName: "Flashplayer",
           genericName: "Flashplayer",
           categories: ["Utility"],
-          icon: "./icon.png",
+          icon: "./icons/icon.png",
           description: "A flash player!",
           AppImageKitRelease: "continuous"
         },
